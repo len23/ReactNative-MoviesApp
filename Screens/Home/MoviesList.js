@@ -13,7 +13,7 @@ export default MoviesList = ({navigation}) => {
 
     const getMovies = async () => {
         try {
-            const movies = await (await fetch('http://192.168.100.4:3000/moviesByCategory', optionsGetListMovies)).json();
+            const movies = await (await fetch('https://imdbmovieservice.onrender.com/moviesByCategory', optionsGetListMovies)).json();
             setData(movies);
         } catch(err) {
             console.error(err);
