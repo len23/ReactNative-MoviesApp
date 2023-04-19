@@ -1,5 +1,7 @@
 # ReactNative-MoviesApp
 
+Demo video:  https://www.youtube.com/watch?v=gbv-6zOLmGY
+
 1. Install expo in your phone
 2. Go to the root project folder
 3. Run ``npm start`` in a terminal t o execute the app, 
