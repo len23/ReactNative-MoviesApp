@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import MovieDetails from "./MovieDetails";
 import HeaderCategory from "./HeaderCategory";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { deleteMovie, saveMovie, getMovies, getSavedIdMovies } from '../../services/moviesService'
-import { useNavigationState } from "@react-navigation/native";
-
 
 export default MoviesList = ({ navigation, route }) => {
 
@@ -13,32 +11,38 @@ export default MoviesList = ({ navigation, route }) => {
   const [category, setCategory] = useState('Top_Ten');
   const [showList, setShowList] = useState(false);
   const [savedList, setSavedList] = useState([]);
+  const [showSpinner, setShowSpinner] = useState(true);
 
   useEffect(() => {
-    getMovies(setData);
+    getMovies((movies) => {
+      setData(movies);
+      setShowSpinner(false);
+    });
     getSavedIdMovies(setSavedList);
-  },[]);
+  }, []);
 
   useEffect(() => {
-      navigation.addListener('tabPress', () => {
-        getSavedIdMovies(setSavedList)
-      });
-    
+    navigation.addListener('tabPress', () => {
+      getSavedIdMovies(setSavedList)
+    });
+
   }, [navigation])
 
 
   useEffect(() => {
     getSavedIdMovies(setSavedList)
-}, [route.params])
+  }, [route.params])
 
-  const handleOnTapBookMark = async (movie) => {
+  const handleOnTapBookMark = async (movie, cb) => {
     try {
       const saved = savedList.some(imdbid => movie.imdbid === imdbid);
       if (!saved) {
         const resultMovie = await saveMovie(movie);
         setSavedList([...savedList, resultMovie.movie.imdbid])
+        cb();
       } else {
-        deleteMovie(movie.imdbid, (id) => setSavedList(savedList.filter(imdbid => imdbid !== id)));
+        await deleteMovie(movie.imdbid, (id) => setSavedList(savedList.filter(imdbid => imdbid !== id)));
+        cb();
       }
     } catch (err) {
       console.error(err);
@@ -61,13 +65,14 @@ export default MoviesList = ({ navigation, route }) => {
           <Ionicons name='list-circle-outline' color={showList ? '#f5c518' : '#FFF'} size={40} onPress={() => { setShowList(true) }} />
         </View>
       </View>
-      <FlatList
-        data={data[category]}
-        renderItem={renderItem}
-        horizontal={!showList}
-        keyExtractor={item => item.id}
-        showsHorizontalScrollIndicator={false}
-      />
+        <FlatList
+          data={data[category]}
+          renderItem={renderItem}
+          horizontal={!showList}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+          />
+          <ActivityIndicator style={{marginTop: 200}} size='large' color="#00ff00" animating={showSpinner} hidesWhenStopped={true}/>
     </View>
   )
 }

@@ -50,7 +50,7 @@ const saveMovie = async (movie) => {
     const resultMovie = await results.json();
     return resultMovie;
   } catch (error) {
-    console.log('error ===> ', error());
+    console.log('error => ', error());
   }
 
 }

@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, ActivityIndicator } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default MouseEvent = ({movie, navigation, showList, onTapBookMark, saved}) => {
+export default MovieDetails = ({movie, navigation, showList, onTapBookMark, saved}) => {
+
+  const [showSpinner, setShowSpinner] = useState(false);
 
       const ItemHorizontalList = ({title, image, genre, rating}) => (
         <View style={styles.item}>
@@ -20,10 +22,16 @@ export default MouseEvent = ({movie, navigation, showList, onTapBookMark, saved}
         </View>
     );
 
+    const handleOnPress = (movie) => {
+      setShowSpinner(true);
+      onTapBookMark(movie, () => setShowSpinner(false))
+    }
+
     const ItemVerticalList = ({movie}) => {
       return  (
         <View style={styles.itemVerticalContainerList}>
-          <Ionicons style={styles.iconBookmark} name={!saved ? `bookmark-outline` : `bookmark`} onPress={() => onTapBookMark(movie)} size={40} color='#FFF'/>
+          <Ionicons style={{...styles.iconBookmark, display: showSpinner ? `none`: `flex`}} name={!saved ? `bookmark-outline` : `bookmark`} onPress={() => handleOnPress(movie)} size={40} color='#FFF'/>
+          <ActivityIndicator style={{...styles.iconBookmark, display: showSpinner ? 'flex' : 'none'}} animating={showSpinner} size='large'/>
           <View>
             <Text style={{color:'#FFF'}}>{movie.title.length > 35 ? `${movie.title.slice(0,35)}...` : movie.title}</Text>
             <Text style={styles.genreVertical}>{movie.genre.join(', ')}</Text>
@@ -86,7 +94,6 @@ const styles = StyleSheet.create({
       height: 60
     },
     iconBookmark: {
-  
       marginRight: 20
     },
     genreVertical: {
