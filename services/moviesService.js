@@ -1,8 +1,10 @@
 import { optionsGetListMovies, optionsPostMovies, local, remote } from "../utils/options-headers";
 
+const nameAddress = remote;
+
 const getMovies = async (cb) => {
     try {
-        const movies = await (await fetch(`${local}/moviesByCategory`, optionsGetListMovies)).json();
+        const movies = await (await fetch(`${nameAddress}/moviesByCategory`, optionsGetListMovies)).json();
         cb(movies);
     } catch (err) {
         console.error(err);
@@ -11,7 +13,7 @@ const getMovies = async (cb) => {
 
 const getSavedIdMovies = async (cb) => {
     try {
-      const movies = await (await fetch(`${local}/getSavedMovies`, optionsGetListMovies)).json();
+      const movies = await (await fetch(`${nameAddress}/getSavedMovies`, optionsGetListMovies)).json();
       cb(movies.map(movie => movie.imdbid));
     } catch (err) {
       console.error(err);
@@ -20,7 +22,7 @@ const getSavedIdMovies = async (cb) => {
 
   const getSavedMovies = async (cb) => {
     try {
-      const movies = await (await fetch(`${local}/getSavedMovies`, optionsGetListMovies)).json();
+      const movies = await (await fetch(`${nameAddress}/getSavedMovies`, optionsGetListMovies)).json();
       cb(movies);
     } catch (err) {
       console.error(err);
@@ -28,30 +30,34 @@ const getSavedIdMovies = async (cb) => {
   }
 
 const saveMovie = async (movie) => {
-    const results =  await fetch(`${local}/saveMovie`, 
-    {  
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        imdbid: movie.imdbid,
-        title: movie.title,
-        thumbnail: movie.thumbnail,
-        rating: movie.rating,
-        director: movie.director,
-        trailer: movie.trailer
+  try {
+      const results =  await fetch(`${nameAddress}/saveMovie`, 
+      {  
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          imdbid: movie.imdbid,
+          title: movie.title,
+          thumbnail: movie.thumbnail,
+          rating: movie.rating,
+          director: movie.director,
+          trailer: movie.trailer
+        })
+      }
+    );
+    const resultMovie = await results.json();
+    return resultMovie;
+  } catch (error) {
+    console.log('error ===> ', error());
+  }
 
-      })
-    }
-  );
-  const resultMovie = await results.json();
-  return resultMovie;
 }
 
 const deleteMovie = async (imdbid, cb) => {
     try {
-        await fetch(`${local}/removeSavedMovie/${imdbid}`,
+        await fetch(`${nameAddress}/removeSavedMovie/${imdbid}`,
         {
             method: 'DELETE',
             headers: {

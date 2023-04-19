@@ -3,8 +3,6 @@ import Home from "./Home/Home";
 import BookMarkList from "./BookmarkList/BookMarkList";
 import Profile from './Profile/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useEffect, useState } from 'react';
-import { optionsGetListMovies, optionsPostMovies, local, remote } from "../utils/options-headers";
 
 const Tab = createBottomTabNavigator();
 

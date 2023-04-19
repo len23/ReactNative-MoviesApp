@@ -5,18 +5,28 @@ import { LinearGradient } from 'expo-linear-gradient';
 import TrailerModal from "./TrailerModal";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useState } from "react";
+import { saveMovie, deleteMovie } from "../../services/moviesService";
 
 export default DetailScreen = ({navigation, route}) => {
 
     const [seeTrailer, setSeeTrailer] = useState(false);
     const [colorButton, setColorButton] = useState('#FFF');
+    const [saved, setSaved] = useState(route.params.saved);
     
     const movie = route.params.movie;
-    const saved = route.params.saved;
 
     const handleSeeTrailer = () => {
         setSeeTrailer(!seeTrailer); 
         setColorButton( colorButton === '#FFF' ? '#f5c518' : '#FFF');
+    }
+
+    const handleSavetrailer = async () => {
+        if(saved) {
+           await deleteMovie(movie.imdbid, () => setSaved(false));
+        } else {
+            await saveMovie(movie);
+            setSaved(true);
+        }
     }
 
     return (
@@ -25,8 +35,8 @@ export default DetailScreen = ({navigation, route}) => {
 
                 <View>
                         <LinearGradient style={styles.header} colors={['#000000c4', '#0000006e', '#0000004d', 'transparent' ]} locations={[0.4 ,0.8, 0.9, 1.0]} >
-                            <Ionicons name="arrow-back-outline" onPress={()=>navigation.dispatch(CommonActions.goBack())} size={40} color='#FFF' />
-                            <Ionicons name={!saved ? `bookmark-outline` : `bookmark`} onPress={()=>{}} size={40} color='#FFF' />
+                            <Ionicons name="arrow-back-outline" onPress={()=>navigation.navigate('Home', {saved: saved})} size={40} color='#FFF' />
+                            <Ionicons name={!saved ? `bookmark-outline` : `bookmark`} onPress={handleSavetrailer} size={40} color='#FFF' />
                         </LinearGradient>
                 </View>
             </ImageBackground>

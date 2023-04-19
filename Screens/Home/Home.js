@@ -7,11 +7,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export default Home = ({navigation}) => {
+export default Home = ({navigation, route}) => {
     return(
         <SafeAreaView style={styles.container}>
             <TopMenu/>
-            <MoviesList navigation={navigation}/>  
+            <MoviesList navigation={navigation} route={route}/>  
         </SafeAreaView>
     );
 }

@@ -4,8 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default MouseEvent = ({movie, navigation, showList, onTapBookMark, saved}) => {
 
-  
-    const ItemHorizontalList = ({title, image, genre, rating}) => (
+      const ItemHorizontalList = ({title, image, genre, rating}) => (
         <View style={styles.item}>
           <Pressable onPress={navigateToDetails} >
             <Image 
@@ -33,7 +32,10 @@ export default MouseEvent = ({movie, navigation, showList, onTapBookMark, saved}
       )}
 
     const navigateToDetails = () => {
-        navigation.navigate('DetailScreen', {movie, saved});
+        navigation.navigate('DetailScreen', {
+          movie, 
+          saved,
+        });
     }
 
       return (

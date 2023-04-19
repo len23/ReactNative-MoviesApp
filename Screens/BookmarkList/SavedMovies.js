@@ -12,7 +12,7 @@ export default SavedMovies = ({navigation}) => {
     }, [])
 
     useEffect(() => {
-        const unsubscribe = navigation.addListener('tabPress', (e) => {
+        const unsubscribe = navigation.addListener('tabPress', () => {
             getSavedMovies(setSavedMovies);
           });
 

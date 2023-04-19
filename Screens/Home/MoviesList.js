@@ -7,7 +7,7 @@ import { deleteMovie, saveMovie, getMovies, getSavedIdMovies } from '../../servi
 import { useNavigationState } from "@react-navigation/native";
 
 
-export default MoviesList = ({ navigation }) => {
+export default MoviesList = ({ navigation, route }) => {
 
   const [data, setData] = useState([]);
   const [category, setCategory] = useState('Top_Ten');
@@ -20,10 +20,16 @@ export default MoviesList = ({ navigation }) => {
   },[]);
 
   useEffect(() => {
-    navigation.addListener('tabPress', () => {
-      getSavedIdMovies(setSavedList)
-    });
+      navigation.addListener('tabPress', () => {
+        getSavedIdMovies(setSavedList)
+      });
+    
   }, [navigation])
+
+
+  useEffect(() => {
+    getSavedIdMovies(setSavedList)
+}, [route.params])
 
   const handleOnTapBookMark = async (movie) => {
     try {
@@ -42,7 +48,7 @@ export default MoviesList = ({ navigation }) => {
   const renderItem = ({ item }) => {
     const saved = savedList.some((imdbid) => item.imdbid === imdbid);
     return (
-      <MovieDetails movie={item} navigation={navigation} showList={showList} onTapBookMark={handleOnTapBookMark} saved={saved} />
+      <MovieDetails movie={item} navigation={navigation} route={route} showList={showList} onTapBookMark={handleOnTapBookMark} saved={saved} />
     );
   }
 
