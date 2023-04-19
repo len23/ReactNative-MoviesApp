@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default MouseEvent = ({movie, navigation, showList, onTapBookMark, saved}) => {
+
   
     const ItemHorizontalList = ({title, image, genre, rating}) => (
         <View style={styles.item}>
@@ -18,28 +21,24 @@ export default MouseEvent = ({movie, navigation, showList, onTapBookMark, saved}
         </View>
     );
 
-    const ItemVerticalList = ({title, genre, id}) => {
+    const ItemVerticalList = ({movie}) => {
       return  (
         <View style={styles.itemVerticalContainerList}>
-          <Pressable onPress={() => onTapBookMark(id)}>
-            { !saved ? <Image style={styles.iconBookmark} source={require(`../../assets/icon-bookmark.png`)}/> : 
-              <Image style={styles.iconBookmark} source={require(`../../assets/filled-bookmark.png`)}/>
-            }
-          </Pressable>
+          <Ionicons style={styles.iconBookmark} name={!saved ? `bookmark-outline` : `bookmark`} onPress={() => onTapBookMark(movie)} size={40} color='#FFF'/>
           <View>
-            <Text style={{color:'#FFF'}}>{title.length > 35 ? `${title.slice(0,35)}...` : title}</Text>
-            <Text style={styles.genreVertical}>{genre.join(', ')}</Text>
+            <Text style={{color:'#FFF'}}>{movie.title.length > 35 ? `${movie.title.slice(0,35)}...` : movie.title}</Text>
+            <Text style={styles.genreVertical}>{movie.genre.join(', ')}</Text>
           </View>
         </View>
       )}
 
     const navigateToDetails = () => {
-        navigation.navigate('DetailScreen', {movie});
+        navigation.navigate('DetailScreen', {movie, saved});
     }
 
       return (
         !showList ? <ItemHorizontalList title={movie.title} image={movie.image} genre={movie.genre} rating={movie.rating}/>
-                 : <ItemVerticalList style={styles.itemVerticalContainerList} title={movie.title} genre={movie.genre} id={movie.id}/>
+                 : <ItemVerticalList style={styles.itemVerticalContainerList} movie={movie}/>
       );
 }
 
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
     itemVerticalContainerList: {
       flexDirection: 'row',
       alignItems: 'center',
-      // paddingVertical: 5,
       paddingHorizontal: 20,
       marginVertical:10,
       backgroundColor: '#1a1a1a',
@@ -86,8 +84,7 @@ const styles = StyleSheet.create({
       height: 60
     },
     iconBookmark: {
-      width: 30,
-      height: 50,
+  
       marginRight: 20
     },
     genreVertical: {

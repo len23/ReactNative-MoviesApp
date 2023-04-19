@@ -7,8 +7,6 @@ import Root from './Screens/Root';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-
   return (
     <NavigationContainer>
        <Stack.Navigator screenOptions={{ headerShown: false }}>

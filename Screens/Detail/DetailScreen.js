@@ -3,8 +3,7 @@ import { CommonActions } from '@react-navigation/native';
 import MovieData from "./MovieData";
 import { LinearGradient } from 'expo-linear-gradient';
 import TrailerModal from "./TrailerModal";
-
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useState } from "react";
 
 export default DetailScreen = ({navigation, route}) => {
@@ -13,6 +12,7 @@ export default DetailScreen = ({navigation, route}) => {
     const [colorButton, setColorButton] = useState('#FFF');
     
     const movie = route.params.movie;
+    const saved = route.params.saved;
 
     const handleSeeTrailer = () => {
         setSeeTrailer(!seeTrailer); 
@@ -25,12 +25,8 @@ export default DetailScreen = ({navigation, route}) => {
 
                 <View>
                         <LinearGradient style={styles.header} colors={['#000000c4', '#0000006e', '#0000004d', 'transparent' ]} locations={[0.4 ,0.8, 0.9, 1.0]} >
-                            <Pressable  onPress={() => navigation.dispatch(CommonActions.goBack())} >
-                                <Image style={styles.goBackArrow} source={require('../../assets/icon-left-arrow.png')}  />
-                            </Pressable>
-                            <Pressable  onPress={() => navigation.dispatch(CommonActions.goBack())} >
-                                <Image style={styles.goBackArrow} source={require('../../assets/icon-bookmark.png')}  />
-                            </Pressable>
+                            <Ionicons name="arrow-back-outline" onPress={()=>navigation.dispatch(CommonActions.goBack())} size={40} color='#FFF' />
+                            <Ionicons name={!saved ? `bookmark-outline` : `bookmark`} onPress={()=>{}} size={40} color='#FFF' />
                         </LinearGradient>
                 </View>
             </ImageBackground>
