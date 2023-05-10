@@ -1,7 +1,5 @@
-import { APIConstants, optionsGetListMovies, remote } from '../constants/APIConstants';
+import { APIConstants, getRequestOptions } from '../constants/APIConstants';
 import { IMovie, IMovieByCategory } from '../types/IMovie';
-
-const nameAddress = remote;
 
 const createFullAPIPath: (path: string) => string = (path) => {
   return (
@@ -13,9 +11,9 @@ const createFullAPIPath: (path: string) => string = (path) => {
   );
 };
 
-async function makeAPICall<T>(path: string): Promise<T> {
+async function makeAPICall<T>(path: string, options?: any): Promise<T> {
   console.log(createFullAPIPath(path));
-  const response = await fetch(createFullAPIPath(path));
+  const response = await fetch(createFullAPIPath(path), options);
   return response.json() as Promise<T>;
 }
 
@@ -41,52 +39,33 @@ export const getSavedIdMovies = async (): Promise<Array<string>> => {
   return data;
 };
 
-// const getSavedMovies = async (cb) => {
-//   try {
-//     const movies = await (
-//       await fetch(`${nameAddress}/getSavedMovies`, optionsGetListMovies)
-//     ).json();
-//     cb(movies);
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
+export const getSavedMovies = async (): Promise<Array<IMovie>> => {
+  let data: Array<IMovie> = [];
+  try {
+    const apiResponse = await makeAPICall<IMovie[]>('/getSavedMovies');
+    data = apiResponse;
+  } catch (err) {
+    console.error(err);
+  }
+  return data;
+};
 
-// const saveMovie = async (movie) => {
-//   try {
-//     const results = await fetch(`${nameAddress}/saveMovie`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         imdbid: movie.imdbid,
-//         title: movie.title,
-//         thumbnail: movie.thumbnail,
-//         rating: movie.rating,
-//         director: movie.director,
-//         trailer: movie.trailer,
-//       }),
-//     });
-//     const resultMovie = await results.json();
-//     return resultMovie;
-//   } catch (error) {
-//     console.log('error => ', error());
-//   }
-// };
+export const saveMovie = async (movie: IMovie): Promise<IMovie | undefined> => {
+  try {
+    const requestOptions = getRequestOptions('POST', 'application/json', JSON.stringify(movie));
+    const data = makeAPICall<IMovie>('/saveMovie', requestOptions);
+    return data;
+  } catch (error) {
+    console.log('error => ', error);
+  }
+};
 
-// const deleteMovie = async (imdbid, cb) => {
-//   try {
-//     await fetch(`${nameAddress}/removeSavedMovie/${imdbid}`, {
-//       method: 'DELETE',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-//     cb(imdbid);
-//   } catch (error) {
-//     console.log('err ==> ', err);
-//   }
-// };
-
-// export { deleteMovie, saveMovie, getMoviesByCategory, getSavedIdMovies, getSavedMovies };
+export const deleteMovie = async (imdbid: string): Promise<IMovie | undefined> => {
+  try {
+    const requestOptions = getRequestOptions('DELETE', 'application/json');
+    const response = makeAPICall<IMovie>(`/removeSavedMovie/${imdbid}`, requestOptions);
+    return response;
+  } catch (err) {
+    console.log('err ==> ', err);
+  }
+};

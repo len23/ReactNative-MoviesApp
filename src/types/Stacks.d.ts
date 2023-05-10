@@ -6,13 +6,13 @@ export type HomeStackParamList = {
     movieSList: IMovieByCategory;
   };
   MovieDetails: {
-    movie: movie;
+    movie: IMovie;
   };
 };
+
 export type FavoritesStackParamList = {
   BookMarkList: undefined;
   MovieDetails: {
     movie: movie;
   };
 };
-export type MapsStackScreen = {};

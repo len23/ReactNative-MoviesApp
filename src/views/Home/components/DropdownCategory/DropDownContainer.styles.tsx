@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { ColorConstants } from '../../../constants/StyleConstants';
+import { ColorConstants } from '../../../../constants/StyleConstants';
 
 const stylesDropDownContainer = StyleSheet.create({
   dropdown: {

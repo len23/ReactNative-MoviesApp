@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import categories from '../../../constants/categories';
-import stylesDropDownContainer from '../styles/DropDownContainer.styles';
+import categories from '../../../../constants/Categories';
+import stylesDropDownContainer from './DropDownContainer.styles';
 
 const styles = { ...stylesDropDownContainer };
 
-const DropdownCategory = ({ onChangeCategory }) => {
+type DropdownCategoryProps = {
+  onChangeCategory: (value: string) => void;
+};
+
+const DropdownCategory = (props: DropdownCategoryProps) => {
   const [value, setValue] = useState('Top_Ten');
 
   return (
@@ -26,7 +30,7 @@ const DropdownCategory = ({ onChangeCategory }) => {
       confirmSelectItem={false}
       onChange={(item) => {
         setValue(item.value);
-        onChangeCategory(item.value);
+        props.onChangeCategory(item.value);
       }}
     />
   );

@@ -1,35 +1,35 @@
-import TopMenu from '../../components/TopMenu';
+import TopMenu from '../../components/TopMenu/TopMenu';
 import { StyleSheet, SafeAreaView, View, ActivityIndicator, FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../types/Stacks';
 import { IMovie, IMovieByCategory } from '../../types/IMovie';
 import { useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import DropdownCategory from './components/DropdownCategory';
+import DropdownCategory from './components/DropdownCategory/DropdownCategory';
 import { stylesHome } from './Home.styles';
-import MovieListItem from './components/MovieListItem';
+import MovieListItem from './components/MovieListItem/MovieListItem';
+import useFavSavedMoviesStore from '../../store/favMoviesStore';
 
 type HomeViewProps = {
   moviesList: IMovieByCategory;
+  favsMoviesList: IMovie[];
   onMoviePress: (movie: IMovie) => void;
+  isLoading: boolean;
 };
 
 const HomeView = (props: HomeViewProps) => {
   const [category, setCategory] = useState<string>('Top_Ten');
   const [showList, setShowList] = useState<boolean>(false);
-  const [savedList, setSavedList] = useState(Array<IMovie>);
-  const [showSpinner, setShowSpinner] = useState<boolean>(true);
 
   const renderItem = ({ item }: { item: IMovie }) => {
-    // const saved = savedList.some((imdbid) => item.imdbid === imdbid);
+    const saved = props.favsMoviesList.some((movie) => movie.imdbid === item.imdbid);
     return (
       <MovieListItem
         movie={item}
         onMoviePress={props.onMoviePress}
-        // route={props.route}
         showList={showList}
         onTapBookMark={() => {}}
-        saved={false}
+        saved={saved}
       />
     );
   };
@@ -70,7 +70,7 @@ const HomeView = (props: HomeViewProps) => {
           style={{ marginTop: 200 }}
           size="large"
           color="#00ff00"
-          animating={showSpinner}
+          animating={props.isLoading}
           hidesWhenStopped={true}
         />
       </View>

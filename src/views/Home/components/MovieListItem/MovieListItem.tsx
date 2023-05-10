@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Text, View, Image, Pressable, ActivityIndicator } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import sylesMovieListItem from '../styles/MovieListItem.styles';
-import { IMovie } from '../../../types/IMovie';
+import sylesMovieListItem from './MovieListItem.styles';
+import { IMovie } from '../../../../types/IMovie';
+import useFavSavedMoviesStore from '../../../../store/favMoviesStore';
 
 const styles = { ...sylesMovieListItem };
 
@@ -15,6 +16,13 @@ type MovieListItemProps = {
 };
 
 const MovieListItem = (props: MovieListItemProps) => {
+  const [favs, isLoading, addToFav, removeFromFav] = useFavSavedMoviesStore((state) => [
+    state.favs,
+    state.isLoading,
+    state.addToFav,
+    state.removeFromFav,
+  ]);
+
   const [showSpinner, setShowSpinner] = useState(false);
 
   const ItemHorizontalList = ({ movie }: { movie: IMovie }) => (
@@ -35,10 +43,12 @@ const MovieListItem = (props: MovieListItemProps) => {
     </View>
   );
 
-  // const handleOnPress = (movie: IMovie) => {
-  //   setShowSpinner(true);
-  //   onTapBookMark(movie, () => setShowSpinner(false));
-  // };
+  const handleOnPress = async (movie: IMovie) => {
+    setShowSpinner(true);
+    const saved = favs.some((fav) => fav.imdbid === movie.imdbid);
+    saved ? await removeFromFav(movie) : await addToFav(movie);
+    setShowSpinner(false);
+  };
 
   const ItemVerticalList = ({ movie }: { movie: IMovie }) => {
     return (
@@ -46,7 +56,7 @@ const MovieListItem = (props: MovieListItemProps) => {
         <Ionicons
           style={{ ...styles.iconBookmark, display: showSpinner ? `none` : `flex` }}
           name={!props.saved ? `bookmark-outline` : `bookmark`}
-          // onPress={() => handleOnPress(movie)}
+          onPress={() => handleOnPress(movie)}
           size={40}
           color="#FFF"
         />

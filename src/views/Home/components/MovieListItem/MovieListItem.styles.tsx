@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { ColorConstants } from '../../../constants/StyleConstants';
+import { ColorConstants } from '../../../../constants/StyleConstants';
 
 const sylesMovieListItem = StyleSheet.create({
   item: {

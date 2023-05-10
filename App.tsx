@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { HomeStackParamList, FavoritesStackParamList } from './src/types/Stacks';
-import BookMarkList from './src/views/Favs/BookMarkList';
-import DetailScreen from './src/views/MovieDetails/DetailScreen';
+import BookMarkList from './src/views/Favs/BookMarkList.view';
+import DetailScreen from './src/views/MovieDetails/DetailScreen.view';
 import Home from './src/views/Home/Index';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
@@ -29,8 +29,6 @@ const FavoritesStackScreen = () => {
     </FavoritesStack.Navigator>
   );
 };
-
-const MapsStackScreen = () => {};
 
 export default function App() {
   return (

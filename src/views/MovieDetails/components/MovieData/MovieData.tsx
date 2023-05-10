@@ -1,7 +1,11 @@
 import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native';
+import stylesMovieData from './MovieData.styles';
+import { IMovie } from '../../../../types/IMovie';
+import { MovieDataProps, SectionProps } from './MovieData.types';
 
-export default MovieData = ({ movie, onClickSeeTrailer, colorButton }) => {
-  const Section = ({ variable, value }) => (
+const MovieData = ({ movie, onClickSeeTrailer, colorButton }: MovieDataProps) => {
+  const styles = { ...stylesMovieData };
+  const Section = ({ variable, value }: SectionProps) => (
     <Text style={styles.SectionVariable}>
       {variable}: <Text style={{ fontWeight: 'normal' }}>{value}</Text>{' '}
     </Text>
@@ -27,56 +31,14 @@ export default MovieData = ({ movie, onClickSeeTrailer, colorButton }) => {
       </ScrollView>
       <Pressable style={{ ...styles.playButtonContainer }} onPress={handleSeeTrailer}>
         <View style={{ ...styles.playButton, backgroundColor: colorButton }}>
-          <Image style={styles.playImage} source={require('../../../../assets/play-button.png')} />
+          <Image
+            style={styles.playImage}
+            source={require('../../../../../assets/play-button.png')}
+          />
         </View>
       </Pressable>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 5,
-    position: 'relative',
-  },
-  movieInfoContainer: {
-    backgroundColor: '#FFF',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    paddingHorizontal: 30,
-  },
-  movieTitle: {
-    fontWeight: '900',
-    fontSize: 35,
-    marginTop: 60,
-  },
-  SectionVariable: {
-    fontWeight: 'bold',
-    fontSize: 17,
-    marginVertical: 10,
-  },
-  playButton: {
-    borderRadius: 300,
-    width: 90,
-    height: 90,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  playButtonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: -45,
-    left: 150,
-    shadowOffset: {
-      width: -1.0,
-      height: -4.0,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 30.0,
-  },
-  playImage: {
-    height: 38,
-    width: 38,
-  },
-});
+export default MovieData;

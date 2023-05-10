@@ -1,15 +1,17 @@
-import { Modal, StyleSheet, View, Button } from 'react-native';
+import { Modal, View, Button, Alert } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import stylesTrailerModal from './TraileModal.styles';
+import { TrailerModalProps } from './TrailerModal.types';
 
-const TrailerModal = ({ seeTrailer, setSeeTrailerProp, idTrailer }) => {
+const TrailerModal = ({ seeTrailer, onPlayTrailer, idTrailer }: TrailerModalProps) => {
+  const styles = { ...stylesTrailerModal };
   const [playing, setPlaying] = useState(true);
-
   const closeModal = () => {
     setPlaying(!playing);
-    setSeeTrailerProp();
+    onPlayTrailer();
   };
-  const onStateChange = useCallback((state) => {
+  const onStateChange = useCallback((state: string) => {
     if (state === 'ended') {
       setPlaying(false);
       Alert.alert('video has finished playing!');
@@ -44,23 +46,5 @@ const TrailerModal = ({ seeTrailer, setSeeTrailerProp, idTrailer }) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 400,
-  },
-  modalView: {
-    alignItems: 'center',
-    backgroundColor: '#000000c4',
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-});
 
 export default TrailerModal;
