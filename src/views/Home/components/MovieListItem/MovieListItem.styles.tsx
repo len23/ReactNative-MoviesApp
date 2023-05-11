@@ -1,26 +1,32 @@
 import { StyleSheet } from 'react-native';
-import { ColorConstants } from '../../../../constants/StyleConstants';
+import {
+  ColorConstants,
+  ContainerStyles,
+  FontConstants,
+  FontSizeConstants,
+  SizeConstants,
+} from '../../../../constants/StyleConstants';
 
 const sylesMovieListItem = StyleSheet.create({
   item: {
-    paddingHorizontal: 20,
-    paddingVertical: 7,
-    marginVertical: 5,
-    marginHorizontal: 16,
-    backgroundColor: ColorConstants.background,
+    paddingHorizontal: SizeConstants.paddingRegular,
+    paddingVertical: SizeConstants.paddingSmall,
+    marginVertical: SizeConstants.paddingSmall,
+    marginHorizontal: SizeConstants.paddingRegular,
+    backgroundColor: ColorConstants.backgroundMedium,
     borderRadius: 40,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 25,
-    marginTop: 20,
-    fontWeight: 'bold',
+    fontSize: FontSizeConstants.mediumSize,
+    marginTop: SizeConstants.paddingRegular,
+    fontWeight: FontConstants.weightBold,
     width: 300,
-    color: '#FFF',
+    color: ColorConstants.primaryFont,
   },
   features: {
-    fontSize: 17,
-    color: '#FFF',
+    fontSize: FontSizeConstants.mediumSize - 5,
+    color: ColorConstants.primaryFont,
   },
   movieImage: {
     width: 280,
@@ -29,22 +35,22 @@ const sylesMovieListItem = StyleSheet.create({
     alignSelf: 'center',
   },
   itemVerticalContainerList: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginVertical: 10,
-    backgroundColor: '#1a1a1a',
-    borderLeftWidth: 2,
-    borderLeftColor: '#f5c518',
-    marginHorizontal: 15,
+    ...ContainerStyles.alignItemscenterRow,
+    justifyContent: 'flex-start',
+    paddingHorizontal: SizeConstants.paddingRegular,
+    marginVertical: SizeConstants.paddingSmall,
+    backgroundColor: ColorConstants.backgroundMedium,
+    borderLeftWidth: SizeConstants.paddingSmall - 5,
+    borderLeftColor: ColorConstants.primaryYellowColor,
+    marginHorizontal: SizeConstants.paddingRegular + 5,
     height: 60,
   },
   iconBookmark: {
-    marginRight: 20,
+    marginRight: SizeConstants.paddingRegular,
   },
   genreVertical: {
-    fontSize: 10,
-    color: '#aaaaaa',
+    fontSize: FontSizeConstants.smallSize + 3,
+    color: ColorConstants.scondaryFont,
   },
 });
 

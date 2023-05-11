@@ -4,6 +4,8 @@ import SavedMovies from './components/SavedMovies/SavedMovies';
 import useFavSavedMoviesStore from '../../store/favMoviesStore';
 import stylesBookMarkList from './BookMarkList.styles';
 import { IMovie } from '../../types/IMovie';
+import { useState } from 'react';
+import TrailerModal from '../../components/TrailerModal/TrailerModal';
 
 const styles = { ...stylesBookMarkList };
 

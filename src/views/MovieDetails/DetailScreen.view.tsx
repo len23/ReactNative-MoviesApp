@@ -1,12 +1,12 @@
 import { ImageBackground, View, ActivityIndicator } from 'react-native';
 import MovieData from './components/MovieData/MovieData';
 import { LinearGradient } from 'expo-linear-gradient';
-import TrailerModal from './components/TrailerModal/TrailerModal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useEffect, useState } from 'react';
 import useFavSavedMoviesStore from '../../store/favMoviesStore';
 import detailScreenStyles from './DetailScreee.styles';
 import { DetailScreenProps } from './DetailScreen.types';
+import TrailerModal from '../../components/TrailerModal/TrailerModal';
 
 const DetailScreen = (props: DetailScreenProps) => {
   const styles = { ...detailScreenStyles };

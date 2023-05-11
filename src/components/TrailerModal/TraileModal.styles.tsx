@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { ContainerStyles } from '../../constants/StyleConstants';
 
 const stylesTrailerModal = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 400,
+    ...ContainerStyles.alignItemscenterColumn,
   },
   modalView: {
     alignItems: 'center',

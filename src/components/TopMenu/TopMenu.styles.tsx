@@ -1,33 +1,35 @@
 import { StyleSheet } from 'react-native';
+import {
+  ColorConstants,
+  ContainerStyles,
+  FontConstants,
+  FontSizeConstants,
+  IconsSizesStyles,
+  SizeConstants,
+} from '../../constants/StyleConstants';
 
 const stylesTopMenu = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 28,
-    paddingVertical: 20,
-    marginBottom: 30,
-    backgroundColor: '#121212',
+    ...ContainerStyles.alignItemscenterRow,
+    paddingHorizontal: SizeConstants.paddingLarge,
+    paddingVertical: SizeConstants.paddingRegular,
+    marginBottom: SizeConstants.paddingLarge,
+    backgroundColor: ColorConstants.backgroundMedium,
   },
   headerTitleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    ...ContainerStyles.alignItemscenterRow,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#FFF',
-    marginLeft: 10,
+    fontSize: FontSizeConstants.bigSize,
+    fontWeight: FontConstants.weightBold,
+    color: ColorConstants.primaryFont,
+    marginLeft: SizeConstants.paddingRegular,
   },
   searchLogo: {
-    width: 35,
-    height: 35,
+    ...IconsSizesStyles.iconsMediumSize,
   },
   imdbLogo: {
-    width: 55,
-    height: 55,
+    ...IconsSizesStyles.iconsBigSize,
   },
 });
 

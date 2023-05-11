@@ -4,9 +4,15 @@ import { IMovie } from '../../../../types/IMovie';
 import { MovieRowProps } from './MovieRow.types';
 import Stars from './components/Stars/Stars';
 import stylesMovieRow from './MovieRow.styles';
+import { useState } from 'react';
+import TrailerModal from '../../../../components/TrailerModal/TrailerModal';
 
 const styles = { ...stylesMovieRow };
 const MovieRow = ({ item, onPressBookmarkIcon }: MovieRowProps) => {
+  const [seeTrailer, setSeeTrailer] = useState<boolean>(false);
+  const handleSeeTrailer = () => {
+    setSeeTrailer(!seeTrailer);
+  };
   return (
     <View style={styles.contaierItem}>
       <View style={styles.detalisContainer}>
@@ -21,7 +27,7 @@ const MovieRow = ({ item, onPressBookmarkIcon }: MovieRowProps) => {
         </View>
       </View>
       <View style={styles.containerIcons}>
-        <Ionicons name="play-sharp" size={30} color="#f5c518" />
+        <Ionicons name="play-sharp" size={30} color="#f5c518" onPress={handleSeeTrailer} />
         <Ionicons
           style={styles.bookmarkIcon}
           name="bookmark"
@@ -32,6 +38,11 @@ const MovieRow = ({ item, onPressBookmarkIcon }: MovieRowProps) => {
           }}
         />
       </View>
+      <TrailerModal
+        seeTrailer={seeTrailer}
+        onPlayTrailer={handleSeeTrailer}
+        idTrailer={item.trailer.split('/').pop()}
+      />
     </View>
   );
 };

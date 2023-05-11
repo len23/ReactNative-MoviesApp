@@ -1,26 +1,30 @@
 import { StyleSheet } from 'react-native';
-import { ColorConstants } from '../../../../constants/StyleConstants';
+import {
+  ColorConstants,
+  FontSizeConstants,
+  IconsSizesStyles,
+  SizeConstants,
+} from '../../../../constants/StyleConstants';
 
 const stylesDropDownContainer = StyleSheet.create({
   dropdown: {
-    marginLeft: 15,
-    paddingLeft: 10,
+    marginLeft: SizeConstants.paddingRegular,
+    paddingLeft: SizeConstants.paddingSmall,
     height: 25,
     width: 150,
     borderLeftWidth: 5,
     borderLeftColor: ColorConstants.borderLeftColor,
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: FontSizeConstants.mediumSize,
   },
   selectedTextStyle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: ColorConstants.font,
+    color: ColorConstants.primaryFont,
   },
   iconStyle: {
-    width: 30,
-    height: 20,
+    ...IconsSizesStyles.iconsMediumSize,
   },
 });
 

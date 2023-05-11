@@ -1,16 +1,22 @@
 import { StyleSheet } from 'react-native';
+import {
+  ColorConstants,
+  FontConstants,
+  FontSizeConstants,
+  SizeConstants,
+} from '../../../../constants/StyleConstants';
 
 const stylesMovieRow = StyleSheet.create({
   contaierItem: {
     flexDirection: 'row',
-    marginBottom: 50,
+    marginBottom: SizeConstants.paddingExtraLarge - 10,
     justifyContent: 'space-around',
-    borderBottomColor: '#FFF',
+    borderBottomColor: ColorConstants.backgroundWhite,
     borderBottomWidth: 1,
-    paddingBottom: 35,
+    paddingBottom: SizeConstants.paddingLarge,
     flex: 10,
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: SizeConstants.paddingRegular,
+    marginRight: SizeConstants.paddingRegular,
   },
   detalisContainer: {
     flexDirection: 'row',
@@ -19,27 +25,27 @@ const stylesMovieRow = StyleSheet.create({
   thumbnail: {
     width: 100,
     height: 100,
-    marginRight: 20,
+    marginRight: SizeConstants.paddingSmall,
   },
   starsContainer: {
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: SizeConstants.paddingSmall + 5,
   },
   title: {
-    color: '#FFF',
-    fontSize: 17,
-    fontWeight: '500',
+    color: ColorConstants.backgroundLight,
+    fontSize: FontSizeConstants.mediumSize - 3,
+    fontWeight: FontConstants.weightBold,
   },
   rating: {
-    color: '#a3a1a1',
+    color: ColorConstants.backgroundMedium,
     fontSize: 15,
   },
   director: {
-    color: '#a3a1a1',
-    fontSize: 15,
+    color: ColorConstants.backgroundMedium,
+    fontSize: FontSizeConstants.mediumSize - 5,
   },
   bookmarkIcon: {
-    marginTop: 10,
+    marginTop: FontSizeConstants.mediumSize - 5,
   },
   containerIcons: {
     alignItems: 'flex-end',

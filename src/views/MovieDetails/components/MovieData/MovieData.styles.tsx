@@ -1,4 +1,12 @@
 import { StyleSheet } from 'react-native';
+import {
+  ColorConstants,
+  ContainerStyles,
+  FontConstants,
+  FontSizeConstants,
+  IconsSizesStyles,
+  SizeConstants,
+} from '../../../../constants/StyleConstants';
 
 const stylesMovieData = StyleSheet.create({
   container: {
@@ -6,31 +14,29 @@ const stylesMovieData = StyleSheet.create({
     position: 'relative',
   },
   movieInfoContainer: {
-    backgroundColor: '#FFF',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    paddingHorizontal: 30,
+    backgroundColor: ColorConstants.backgroundWhite,
+    borderTopLeftRadius: SizeConstants.radiousSize,
+    borderTopRightRadius: SizeConstants.radiousSize,
+    paddingHorizontal: SizeConstants.paddingLarge,
   },
   movieTitle: {
-    fontWeight: '900',
-    fontSize: 35,
-    marginTop: 60,
+    fontWeight: FontConstants.weightBold,
+    fontSize: FontSizeConstants.bigSize + 5,
+    marginTop: SizeConstants.paddingExtraLarge,
   },
   SectionVariable: {
-    fontWeight: 'bold',
-    fontSize: 17,
-    marginVertical: 10,
+    fontWeight: FontConstants.weightBold,
+    fontSize: FontSizeConstants.mediumSize - 3,
+    marginVertical: SizeConstants.paddingSmall - 6,
   },
   playButton: {
+    ...IconsSizesStyles.iconsExtraBigSize,
+    ...ContainerStyles.alignItemscenterColumn,
     borderRadius: 300,
-    width: 90,
-    height: 90,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   playButtonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...ContainerStyles.alignItemscenterColumn,
     position: 'absolute',
     top: -45,
     left: 150,
@@ -42,8 +48,7 @@ const stylesMovieData = StyleSheet.create({
     shadowRadius: 30.0,
   },
   playImage: {
-    height: 38,
-    width: 38,
+    ...IconsSizesStyles.iconsMediumSize,
   },
 });
 

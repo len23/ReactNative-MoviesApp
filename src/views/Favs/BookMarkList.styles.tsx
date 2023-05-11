@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { ColorConstants } from '../../constants/StyleConstants';
 
 const stylesBookMarkList = StyleSheet.create({
   container: {
-    backgroundColor: '#000',
-    height: '100%', //Temporary
+    backgroundColor: ColorConstants.backgroundDark,
+    flex: 1,
   },
 });
 

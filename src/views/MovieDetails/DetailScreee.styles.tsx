@@ -1,8 +1,14 @@
 import { StyleSheet } from 'react-native';
+import {
+  ColorConstants,
+  ContainerStyles,
+  IconsSizesStyles,
+  SizeConstants,
+} from '../../constants/StyleConstants';
 
 const detailScreenStyles = StyleSheet.create({
   container: {
-    backgroundColor: '#000',
+    backgroundColor: ColorConstants.backgroundDark,
     flex: 1,
   },
   backgroundImageMovie: {
@@ -12,16 +18,13 @@ const detailScreenStyles = StyleSheet.create({
     flex: 5,
   },
   header: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 50,
+    ...ContainerStyles.alignItemsStartRow,
+    paddingTop: SizeConstants.paddingExtraLarge,
     paddingBottom: 15,
     paddingHorizontal: 26,
   },
   goBackArrow: {
-    width: 35,
-    height: 35,
+    ...IconsSizesStyles.iconsMediumSize,
   },
   video: {
     alignSelf: 'center',
