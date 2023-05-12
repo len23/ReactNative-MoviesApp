@@ -2,7 +2,7 @@
 
 Demo video:  https://www.youtube.com/watch?v=gbv-6zOLmGY
 
-1. Install expo in your phone
+1. Install expo in your phone and your computer (https://reactnative.dev/docs/0.67/environment-setup)
 2. Go to the root project folder
 3. Run ``npm start`` in a terminal t o execute the app, 
 4. Scan the QR code 
