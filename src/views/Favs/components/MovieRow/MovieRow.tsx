@@ -2,10 +2,10 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { IMovie } from '../../../../types/IMovie';
 import { MovieRowProps } from './MovieRow.types';
-import Stars from './components/Stars/Stars';
 import stylesMovieRow from './MovieRow.styles';
 import { useState } from 'react';
 import TrailerModal from '../../../../components/TrailerModal/TrailerModal';
+import { Stars } from './components/Stars/Stars';
 
 const styles = { ...stylesMovieRow };
 const MovieRow = ({ item, onPressBookmarkIcon }: MovieRowProps) => {
