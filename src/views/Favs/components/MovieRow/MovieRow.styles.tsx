@@ -32,16 +32,16 @@ const stylesMovieRow = StyleSheet.create({
     marginTop: SizeConstants.paddingSmall + 5,
   },
   title: {
-    color: ColorConstants.backgroundLight,
+    color: ColorConstants.backgroundWhite,
     fontSize: FontSizeConstants.mediumSize - 3,
     fontWeight: FontConstants.weightBold,
   },
   rating: {
-    color: ColorConstants.backgroundMedium,
+    color: ColorConstants.backgroundWhite,
     fontSize: 15,
   },
   director: {
-    color: ColorConstants.backgroundMedium,
+    color: ColorConstants.backgroundWhite,
     fontSize: FontSizeConstants.mediumSize - 5,
   },
   bookmarkIcon: {
