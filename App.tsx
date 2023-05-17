@@ -6,6 +6,8 @@ import { HomeStackParamList, FavoritesStackParamList } from './src/types/Stacks'
 import BookMarkList from './src/views/Favs/BookMarkList.view';
 import DetailScreen from './src/views/MovieDetails/DetailScreen.view';
 import Home from './src/views/Home/Index';
+import { useState } from 'react';
+import Login from './src/views/Login/Login';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const FavoritesStack = createNativeStackNavigator<FavoritesStackParamList>();
@@ -31,6 +33,12 @@ const FavoritesStackScreen = () => {
 };
 
 export default function App() {
+  const [login, setLogin] = useState<boolean>(false);
+
+  if (!login) {
+    return <Login />;
+  }
+
   return (
     <NavigationContainer>
       <TabNavigator.Navigator
