@@ -2,15 +2,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { HomeStackParamList, FavoritesStackParamList } from './src/types/Stacks';
+import {
+  HomeStackParamList,
+  FavoritesStackParamList,
+  SignUpStackParamsList,
+} from './src/types/Stacks';
 import BookMarkList from './src/views/Favs/BookMarkList.view';
 import DetailScreen from './src/views/MovieDetails/DetailScreen.view';
 import Home from './src/views/Home/Index';
 import { useState } from 'react';
 import Login from './src/views/Login/Login';
+import SignUp from './src/views/SignUp/SignUp';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const FavoritesStack = createNativeStackNavigator<FavoritesStackParamList>();
+const SignUpSatck = createNativeStackNavigator<SignUpStackParamsList>();
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -32,11 +38,32 @@ const FavoritesStackScreen = () => {
   );
 };
 
+const SignUpSatckScreen = () => {
+  return (
+    <SignUpSatck.Navigator>
+      <SignUpSatck.Screen name="LogIn" component={Login} options={{ headerShown: false }} />
+      <SignUpSatck.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          headerBackButtonMenuEnabled: true,
+          headerTitle: '',
+          headerTransparent: true,
+        }}
+      />
+    </SignUpSatck.Navigator>
+  );
+};
+
 export default function App() {
   const [login, setLogin] = useState<boolean>(false);
 
   if (!login) {
-    return <Login />;
+    return (
+      <NavigationContainer>
+        <SignUpSatckScreen />
+      </NavigationContainer>
+    );
   }
 
   return (

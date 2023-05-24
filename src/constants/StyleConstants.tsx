@@ -45,6 +45,8 @@ const SizeConstants = {
   paddingExtraLarge: 60,
 
   radiousSize: 50,
+
+  widthLarge: 300,
 };
 
 const FontSizeConstants = {

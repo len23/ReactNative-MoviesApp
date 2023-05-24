@@ -16,3 +16,8 @@ export type FavoritesStackParamList = {
     movie: movie;
   };
 };
+
+export type SignUpStackParamsList = {
+  LogIn: undefined;
+  SignUp: undefined;
+};

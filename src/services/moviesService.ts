@@ -1,21 +1,5 @@
-import { APIConstants, getRequestOptions } from '../constants/APIConstants';
 import { IMovie, IMovieByCategory } from '../types/IMovie';
-
-const createFullAPIPath: (path: string) => string = (path) => {
-  return (
-    APIConstants.API_URL +
-    path +
-    (path.includes('?') ? '&' : '?') +
-    'api_key=' +
-    APIConstants.API_KEY
-  );
-};
-
-async function makeAPICall<T>(path: string, options?: any): Promise<T> {
-  console.log(createFullAPIPath(path));
-  const response = await fetch(createFullAPIPath(path), options);
-  return response.json() as Promise<T>;
-}
+import { getRequestOptions, makeAPICall } from './apiUtilities';
 
 export const getMoviesByCategory = async (): Promise<IMovieByCategory> => {
   let data: IMovieByCategory = {};
