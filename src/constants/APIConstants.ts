@@ -9,6 +9,6 @@ export const APIConstants: fetchParams = {
 };
 
 export const APILocalConstants: fetchParams = {
-  API_URL: 'http://192.168.1.107:5001',
+  API_URL: 'http://192.168.100.4:5001',
   API_KEY: 'null',
 };

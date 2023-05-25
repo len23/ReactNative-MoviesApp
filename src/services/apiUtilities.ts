@@ -1,4 +1,18 @@
 import { APIConstants, APILocalConstants } from '../constants/APIConstants';
+import {
+  FileSystemAcceptedUploadHttpMethod,
+  FileSystemUploadResult,
+  FileSystemUploadType,
+  uploadAsync,
+} from 'expo-file-system';
+
+type RequestOptions = {
+  method: string;
+  headers: {
+    'Content-Type': string;
+  };
+  body: any;
+};
 
 export const createFullAPIPath: (path: string) => string = (path) => {
   return (
@@ -13,16 +27,26 @@ export const createFullAPIPath: (path: string) => string = (path) => {
 export async function makeAPICall<T>(path: string, options?: any): Promise<T> {
   console.log(createFullAPIPath(path));
   const response = await fetch(createFullAPIPath(path), options);
+  if (response.status !== 200) {
+    const message = await response.json();
+    throw new Error(message.error);
+  }
   return response.json() as Promise<T>;
 }
 
-type RequestOptions = {
-  method: string;
-  headers: {
-    'Content-Type': string;
-  };
-  body: any;
-};
+export async function makeAPIFileCall(
+  path: string,
+  fileUri: string,
+  uploadType: FileSystemUploadType,
+  method: FileSystemAcceptedUploadHttpMethod,
+): Promise<FileSystemUploadResult> {
+  const response = await uploadAsync(createFullAPIPath(path), fileUri, {
+    fieldName: 'file',
+    httpMethod: method,
+    uploadType: uploadType,
+  });
+  return response;
+}
 
 export const getRequestOptions = (
   method: string,

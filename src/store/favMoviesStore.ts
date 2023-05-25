@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IMovie, IMovieByCategory } from '../types/IMovie';
+import { IMovie } from '../types/IMovie';
 import { deleteMovie, getSavedMovies, saveMovie } from '../services/moviesService';
 
 type FavSavedMoviesStore = {

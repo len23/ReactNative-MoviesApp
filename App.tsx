@@ -13,6 +13,7 @@ import Home from './src/views/Home/Index';
 import { useState } from 'react';
 import Login from './src/views/Login/Login';
 import SignUp from './src/views/SignUp/SignUp';
+import useAuthStore from './src/store/authStore';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const FavoritesStack = createNativeStackNavigator<FavoritesStackParamList>();
@@ -46,7 +47,6 @@ const SignUpSatckScreen = () => {
         name="SignUp"
         component={SignUp}
         options={{
-          headerBackButtonMenuEnabled: true,
           headerTitle: '',
           headerTransparent: true,
         }}
@@ -56,7 +56,7 @@ const SignUpSatckScreen = () => {
 };
 
 export default function App() {
-  const [login, setLogin] = useState<boolean>(false);
+  const [login, setLogin] = useAuthStore((state) => [state.login, state.setLogin]);
 
   if (!login) {
     return (
