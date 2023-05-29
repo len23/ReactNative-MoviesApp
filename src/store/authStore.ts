@@ -4,15 +4,15 @@ type AuthStore = {
   token: string;
   login: boolean;
   getToken: () => void;
-  setLogin: () => void;
+  setLogin: (islogin: boolean) => void;
 };
 
 const useAuthStore = create<AuthStore>((set, get) => ({
   token: '',
-  login: false,
+  login: true,
   getToken: () => {},
-  setLogin: () => {
-    set({ login: true });
+  setLogin: (islogin: boolean) => {
+    set({ login: islogin });
   },
 }));
 

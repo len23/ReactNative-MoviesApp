@@ -1,4 +1,4 @@
 export type ILogin = {
-  uuserName: string;
+  userName: string;
   password: string;
 };

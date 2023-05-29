@@ -6,18 +6,23 @@ import {
   HomeStackParamList,
   FavoritesStackParamList,
   SignUpStackParamsList,
+  UserProfileParamList,
+  MapsParamsList,
 } from './src/types/Stacks';
 import BookMarkList from './src/views/Favs/BookMarkList.view';
 import DetailScreen from './src/views/MovieDetails/DetailScreen.view';
 import Home from './src/views/Home/Index';
-import { useState } from 'react';
 import Login from './src/views/Login/Login';
 import SignUp from './src/views/SignUp/SignUp';
 import useAuthStore from './src/store/authStore';
+import UserProfile from './src/views/UserProfile/UserProfile';
+import Maps from './src/views/Maps/Maps';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const FavoritesStack = createNativeStackNavigator<FavoritesStackParamList>();
 const SignUpSatck = createNativeStackNavigator<SignUpStackParamsList>();
+const UserProfileStack = createNativeStackNavigator<UserProfileParamList>();
+const MapsStack = createNativeStackNavigator<MapsParamsList>();
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -55,6 +60,26 @@ const SignUpSatckScreen = () => {
   );
 };
 
+const UserProfileStackScreen = () => {
+  return (
+    <UserProfileStack.Navigator>
+      <UserProfileStack.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{ headerShown: false }}
+      />
+    </UserProfileStack.Navigator>
+  );
+};
+
+const MapsStackScreen = () => {
+  return (
+    <MapsStack.Navigator>
+      <MapsStack.Screen name="Maps" component={Maps} options={{ headerShown: false }} />
+    </MapsStack.Navigator>
+  );
+};
+
 export default function App() {
   const [login, setLogin] = useAuthStore((state) => [state.login, state.setLogin]);
 
@@ -88,6 +113,20 @@ export default function App() {
           component={FavoritesStackScreen}
           options={{
             tabBarIcon: ({ color }) => <Ionicons name="bookmark" color={color} size={30} />,
+          }}
+        />
+        {/* <TabNavigator.Screen
+          name="UserProfileTab"
+          component={UserProfileStackScreen}
+          options={{
+            tabBarIcon: ({ color }) => <Ionicons name="person-circle" color={color} size={30} />,
+          }}
+        /> */}
+        <TabNavigator.Screen
+          name="MapsTab"
+          component={MapsStackScreen}
+          options={{
+            tabBarIcon: ({ color }) => <Ionicons name="map" color={color} size={30} />,
           }}
         />
       </TabNavigator.Navigator>
