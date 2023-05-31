@@ -11,11 +11,14 @@ type ContImgBckgrdPrps = {
 const styles = { ...stylesContImgBckgrd };
 const ContImgBckgrd = (props: ContImgBckgrdPrps) => {
   return (
-    <LinearGradient style={styles.gradient} colors={props.gradientColors}>
-      <ImageBackground style={styles.backgroundImage} source={props.imgPath}>
+    <ImageBackground
+      style={styles.backgroundImage}
+      source={typeof props.imgPath === 'number' ? props.imgPath : { uri: props.imgPath }}
+    >
+      <LinearGradient style={styles.gradient} colors={props.gradientColors}>
         {props.children}
-      </ImageBackground>
-    </LinearGradient>
+      </LinearGradient>
+    </ImageBackground>
   );
 };
 

@@ -8,6 +8,9 @@ export type HomeStackParamList = {
   MovieDetails: {
     movie: IMovie;
   };
+  MovieProviders: {
+    movie: IMovie;
+  };
 };
 
 export type FavoritesStackParamList = {

@@ -128,7 +128,7 @@ const SignUp = (props: SignUpProps) => {
 
   return (
     <ContImgBckgrd
-      gradientColors={['#0A3047', '#0A3047']}
+      gradientColors={['rgba(3,37,65, 0.4)', 'rgba(3,37,65, 0.8)']}
       imgPath={require('../../../assets/movie-background-sing-up.jpg')}
     >
       {!isLoading ? (

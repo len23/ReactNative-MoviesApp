@@ -1,4 +1,4 @@
-import { View, Text, Button, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, Button, Alert, ActivityIndicator, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { stylesLogin } from './Login.styles';
 import ContImgBckgrd from '../../containers/ContImgBckgrd/ContImgBckgrd';
@@ -35,11 +35,11 @@ const Login = (props: LoginProps) => {
 
   return (
     <ContImgBckgrd
-      gradientColors={['#0A3047', '#0A3047']}
+      gradientColors={['rgba(3,37,65, 0.4)', 'rgba(3,37,65, 0.8)']}
       imgPath={require('../../../assets/movie-background-collage.jpg')}
     >
       {!isLoading ? (
-        <>
+        <SafeAreaView>
           <View style={styles.formContainer}>
             <TextIconInput
               ionIconName="person-outline"
@@ -70,7 +70,7 @@ const Login = (props: LoginProps) => {
               <Ionicons name="logo-google" color={'#FFF'} size={40} />
             </View>
           </View>
-        </>
+        </SafeAreaView>
       ) : (
         <ActivityIndicator
           size="large"

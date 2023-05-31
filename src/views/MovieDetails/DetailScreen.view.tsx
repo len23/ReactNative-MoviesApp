@@ -18,10 +18,12 @@ const DetailScreen = (props: DetailScreenProps) => {
   ]);
   const [seeTrailer, setSeeTrailer] = useState<boolean>(false);
   const [colorButton, setColorButton] = useState<string>('#FFF');
+
   const [saved, setSaved] = useState<Boolean>(() =>
     favs.some((fav) => movie.imdbid === fav.imdbid),
   );
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setSaved(favs.some((fav) => movie.imdbid === fav.imdbid));
   }, [favs]);
@@ -39,6 +41,10 @@ const DetailScreen = (props: DetailScreenProps) => {
       await addToFav(movie);
     }
     setIsLoading(false);
+  };
+
+  const handleWatchNow = () => {
+    props.navigation.navigate('MovieProviders', { movie: movie });
   };
 
   return (
@@ -69,7 +75,12 @@ const DetailScreen = (props: DetailScreenProps) => {
           </LinearGradient>
         </View>
       </ImageBackground>
-      <MovieData movie={movie} onClickSeeTrailer={handleSeeTrailer} colorButton={colorButton} />
+      <MovieData
+        movie={movie}
+        onClickSeeTrailer={handleSeeTrailer}
+        colorButton={colorButton}
+        onClickWatchNow={handleWatchNow}
+      />
       <TrailerModal
         seeTrailer={seeTrailer}
         onPlayTrailer={handleSeeTrailer}

@@ -17,6 +17,7 @@ import SignUp from './src/views/SignUp/SignUp';
 import useAuthStore from './src/store/authStore';
 import UserProfile from './src/views/UserProfile/UserProfile';
 import Maps from './src/views/Maps/Maps';
+import MovieProviders from './src/views/MovieProviders/MovieProviders';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const FavoritesStack = createNativeStackNavigator<FavoritesStackParamList>();
@@ -31,6 +32,23 @@ const HomeStackScreen = () => {
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home" component={Home} />
       <HomeStack.Screen name="MovieDetails" component={DetailScreen} />
+      <HomeStack.Screen
+        name="MovieProviders"
+        component={MovieProviders}
+        options={({ navigation, route }) => ({
+          headerShown: true,
+          headerTransparent: true,
+          headerTitle: '',
+          headerLeft: () => (
+            <Ionicons
+              name="arrow-back-outline"
+              color="#FFF"
+              size={40}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
     </HomeStack.Navigator>
   );
 };

@@ -2,17 +2,17 @@ import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-nati
 import stylesMovieData from './MovieData.styles';
 import { IMovie } from '../../../../types/IMovie';
 import { MovieDataProps, SectionProps } from './MovieData.types';
+import PresseableButton from '../../../../components/PresseableButton/PresseableButton';
+import WatchButton from '../WatchButton/WatchButton';
+import SectionText from '../SectionText/SectionText';
 
-const MovieData = ({ movie, onClickSeeTrailer, colorButton }: MovieDataProps) => {
+const MovieData = ({ movie, onClickSeeTrailer, colorButton, onClickWatchNow }: MovieDataProps) => {
   const styles = { ...stylesMovieData };
-  const Section = ({ variable, value }: SectionProps) => (
-    <Text style={styles.SectionVariable}>
-      {variable}: <Text style={{ fontWeight: 'normal' }}>{value}</Text>{' '}
-    </Text>
-  );
+
   const handleSeeTrailer = () => {
     onClickSeeTrailer();
   };
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.movieInfoContainer}>
@@ -20,14 +20,22 @@ const MovieData = ({ movie, onClickSeeTrailer, colorButton }: MovieDataProps) =>
         <Text>
           {movie.genre.join(', ')} {'\n'}
         </Text>
-        <Section variable="Rankng" value={movie.rank} />
-        <Section variable="Year" value={movie.year} />
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <View>
+            <SectionText variable="Rankng" value={movie.rank} />
+            <SectionText variable="Year" value={movie.year} />
+          </View>
+          <View>
+            <WatchButton onPressWatchNow={onClickWatchNow} />
+          </View>
+        </View>
         <Text style={{ fontSize: 17 }}>
           {'\n'}
           {movie.description}
         </Text>
-        <Section variable="Director" value={movie.director.join(', ')} />
-        <Section variable="Writers" value={movie.writers.join(', ')} />
+        <SectionText variable="Director" value={movie.director.join(', ')} />
+        <SectionText variable="Writers" value={movie.writers.join(', ')} />
       </ScrollView>
       <Pressable style={{ ...styles.playButtonContainer }} onPress={handleSeeTrailer}>
         <View style={{ ...styles.playButton, backgroundColor: colorButton }}>
