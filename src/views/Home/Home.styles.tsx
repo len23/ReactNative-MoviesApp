@@ -6,44 +6,11 @@ const stylesIMDB = StyleSheet.create({
   container: {
     flex: 1,
   },
-
-  categoryTitleContainer: {
-    ...ContainerStyles.alignItemscenterRow,
-    marginBottom: SizeConstants.paddingSmall,
-    marginHorizontal: SizeConstants.paddingSmall,
-  },
-  list: {
-    overflow: 'hidden',
-  },
-  iconsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: 110,
-  },
-  viewIcon: {
-    marginLeft: SizeConstants.paddingRegular,
-  },
 });
 
 const stylesNowPlaying = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  categoryTitleContainer: {
-    ...ContainerStyles.alignItemscenterRow,
-    marginBottom: SizeConstants.paddingSmall,
-    marginHorizontal: SizeConstants.paddingSmall,
-  },
-  list: {
-    overflow: 'hidden',
-  },
-  iconsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: 110,
-  },
-  viewIcon: {
-    marginLeft: SizeConstants.paddingRegular,
   },
 });
 

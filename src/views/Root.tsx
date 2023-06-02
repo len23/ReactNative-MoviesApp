@@ -8,9 +8,11 @@ import {
 } from '../Routes/routes';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useAuthStore from '../store/authStore';
+import useThemeStore from '../store/themeStore';
 
 const Root = () => {
   const TabNavigator = createBottomTabNavigator();
+  const [themeStyles] = useThemeStore((state) => [state.themeStyles]);
 
   const [login, setLogin] = useAuthStore((state) => [state.login, state.setLogin]);
 
@@ -27,8 +29,12 @@ const Root = () => {
       <TabNavigator.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarStyle: { backgroundColor: '#000', borderTopColor: '#000' },
-          tabBarActiveTintColor: '#f5c518',
+          tabBarStyle: {
+            backgroundColor: themeStyles.tabBackgroundColor,
+            borderTopColor: '#000',
+            paddingTop: 15,
+          },
+          tabBarActiveTintColor: themeStyles.tabIconColor,
           tabBarShowLabel: false,
         }}
       >

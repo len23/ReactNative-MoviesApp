@@ -4,8 +4,8 @@ import SavedMovies from './components/SavedMovies/SavedMovies';
 import useFavSavedMoviesStore from '../../store/favMoviesStore';
 import stylesBookMarkList from './BookMarkList.styles';
 import { IMovie } from '../../types/IMovie';
-import { useState } from 'react';
-import TrailerModal from '../../components/TrailerModal/TrailerModal';
+import useThemeStore from '../../store/themeStore';
+import MainContainer from '../../containers/MainContainer/MainContainer';
 
 const styles = { ...stylesBookMarkList };
 
@@ -15,15 +15,16 @@ const BookMarkList = () => {
     state.removeFromFav,
   ]);
 
+  const [theme] = useThemeStore((state) => [state.optionTheme]);
+
   const handleRemoveFromFav = async (movie: IMovie) => {
     await removeFromFav(movie);
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TopMenu />
+    <MainContainer>
       <SavedMovies favs={favs} removeFromFav={handleRemoveFromFav} />
-    </SafeAreaView>
+    </MainContainer>
   );
 };
 

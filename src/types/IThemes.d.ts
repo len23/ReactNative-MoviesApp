@@ -3,4 +3,6 @@ export type ThemeAplication = {
   menuColor: string;
   logoMenu: any;
   titleMenu: string;
+  tabBackgroundColor: string;
+  tabIconColor: string;
 };
