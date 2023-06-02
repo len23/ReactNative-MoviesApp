@@ -1,15 +1,24 @@
 import { Text, View, Image } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import stylesTopMenu from './TopMenu.styles';
 
+type TopMenuProps = {
+  onPressDownArrow: () => void;
+  backgroundColor: string;
+  logoMenu: any;
+  titleMenu: string;
+};
+
 const styles = { ...stylesTopMenu };
-const TopMenu = () => {
+const TopMenu = (props: TopMenuProps) => {
+  const { onPressDownArrow, backgroundColor, logoMenu, titleMenu } = props;
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, backgroundColor: backgroundColor }}>
       <View style={styles.headerTitleContainer}>
-        <Image style={styles.imdbLogo} source={require('../../../assets/imdb_image_full.png')} />
-        <Text style={styles.title}>Best Movies</Text>
+        <Image style={styles.imdbLogo} source={logoMenu} />
+        <Text style={styles.title}>{titleMenu}</Text>
       </View>
-      <Image style={styles.searchLogo} source={require('../../../assets/search-icon-white.png')} />
+      <Ionicons name="caret-down-outline" color={'#FFF'} size={40} onPress={onPressDownArrow} />
     </View>
   );
 };

@@ -1,6 +1,6 @@
-import { FlatList, Image, Pressable, ScrollView, Text, View } from 'react-native';
-import { IProvider, Transaction } from '../../../../types/IMovieProviders';
-import { useEffect, useState } from 'react';
+import { FlatList, Image, Pressable, Text, View } from 'react-native';
+import { Transaction } from '../../../../types/IMovieProviders';
+import { transactionsStyles } from './Transactions.styles';
 
 type TransactionsProps = {
   transactionsObject: Transaction;
@@ -13,6 +13,9 @@ export enum TransactionEnum {
   free = 'Free',
   ads = 'Ads',
 }
+
+const styles = { ...transactionsStyles };
+
 const Transactions = (props: TransactionsProps) => {
   const { transactionsObject } = props;
   const transactionKeys = Object.keys(transactionsObject);
@@ -20,23 +23,16 @@ const Transactions = (props: TransactionsProps) => {
   const renderItem = ({ item }: { item: string }) => {
     if (item !== 'link') {
       return (
-        <View key={item}>
-          <Text style={{ fontSize: 30, color: '#FFF', marginTop: 35 }}>{_geTransaction(item)}</Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View>
+          <Text style={styles.transactionTTitle}>{_geTransaction(item)}</Text>
+          <View style={styles.providersContainer}>
             {transactionsObject[item].map((provider, index) => (
-              <Pressable>
+              <Pressable key={`${item}_${provider.provider_name}_${index}`}>
                 <Image
                   source={{
                     uri: `https://www.themoviedb.org/t/p/original/${provider.logo_path}`,
                   }}
-                  style={{
-                    width: 65,
-                    height: 65,
-                    marginHorizontal: 10,
-                    marginVertical: 10,
-                    borderRadius: 10,
-                  }}
-                  key={`${provider.provider_name}_${index}`}
+                  style={styles.providerImage}
                 />
               </Pressable>
             ))}
@@ -48,7 +44,7 @@ const Transactions = (props: TransactionsProps) => {
   };
 
   return (
-    <View style={{ marginTop: 50, marginHorizontal: 20 }}>
+    <View style={{ marginTop: -30, marginHorizontal: 20 }}>
       <FlatList
         data={transactionKeys}
         renderItem={renderItem}

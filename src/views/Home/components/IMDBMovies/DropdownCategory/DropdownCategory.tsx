@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import categories from '../../../../constants/Categories';
+import categories from '../../../../../constants/Categories';
 import stylesDropDownContainer from './DropDownContainer.styles';
 
 const styles = { ...stylesDropDownContainer };

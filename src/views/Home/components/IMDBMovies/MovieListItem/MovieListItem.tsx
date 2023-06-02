@@ -2,15 +2,14 @@ import { useState } from 'react';
 import { Text, View, Image, Pressable, ActivityIndicator } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import sylesMovieListItem from './MovieListItem.styles';
-import { IMovie } from '../../../../types/IMovie';
-import useFavSavedMoviesStore from '../../../../store/favMoviesStore';
+import { IMovie } from '../../../../../types/IMovie';
+import useFavSavedMoviesStore from '../../../../../store/favMoviesStore';
 
 const styles = { ...sylesMovieListItem };
 
 type MovieListItemProps = {
   movie: IMovie;
   showList: boolean;
-  onTapBookMark?: () => void;
   onMoviePress: (movie: IMovie) => void;
   saved?: boolean;
 };

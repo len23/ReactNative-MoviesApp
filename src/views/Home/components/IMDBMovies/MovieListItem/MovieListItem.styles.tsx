@@ -5,7 +5,7 @@ import {
   FontConstants,
   FontSizeConstants,
   SizeConstants,
-} from '../../../../constants/StyleConstants';
+} from '../../../../../constants/StyleConstants';
 
 const sylesMovieListItem = StyleSheet.create({
   item: {

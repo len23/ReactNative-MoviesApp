@@ -4,7 +4,7 @@ import {
   FontSizeConstants,
   IconsSizesStyles,
   SizeConstants,
-} from '../../../../constants/StyleConstants';
+} from '../../../../../constants/StyleConstants';
 
 const stylesDropDownContainer = StyleSheet.create({
   dropdown: {
