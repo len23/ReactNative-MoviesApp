@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Dimensions, Image, Pressable, Text, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import useMoviesStore from '../../../../store/moviesStore';
-import { log } from 'react-native-reanimated';
+import { styles } from './NowPlaying.styles';
 
 function NowPlaying() {
   const window = Dimensions.get('window');
@@ -14,34 +14,33 @@ function NowPlaying() {
     <Carousel
       loop
       width={400}
-      height={HEIGHT_WIDTH * 0.7}
+      height={HEIGHT_WIDTH * 0.75}
       autoPlay={true}
       pagingEnabled={false}
       snapEnabled={false}
       mode="parallax"
       data={moviesPlayingNow}
       scrollAnimationDuration={3000}
-      onSnapToItem={(index) => console.log('current index:', index)}
       renderItem={({ item }) => (
         <View
           style={{
             flex: 1,
             justifyContent: 'center',
-            marginTop: -60,
+            marginTop: -80,
           }}
         >
           <Image
             style={{ flex: 1, borderRadius: 25 }}
             source={{ uri: `https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item.poster_path}` }}
           />
-          <Text style={{ textAlign: 'center', fontSize: 30 }}>{item.original_title}</Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            <Text>{item.vote_count}</Text>
-            <Text>{item.vote_average}</Text>
-            <Text>{item.popularity}</Text>
+          <Text style={styles.title} numberOfLines={1}>{item.original_title}</Text>
+          <View style={styles.metricsContainer}>
+            <Text style={styles.metricsInfo}>{item.vote_count}</Text>
+            <Text style={styles.metricsInfo}>{item.vote_average}</Text>
+            <Text style={styles.metricsInfo}>{item.popularity}</Text>
           </View>
-          <Pressable>
-            <Text>Buy Tickets</Text>
+          <Pressable style={styles.moreInfoButton}>
+            <Text style={styles.buttonText}>  More Info</Text>
           </Pressable>
         </View>
       )}
