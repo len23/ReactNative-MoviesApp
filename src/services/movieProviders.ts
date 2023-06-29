@@ -3,13 +3,13 @@ import { ICountryProvider } from '../types/IMovieProviders';
 import { makeAPICall } from './apiUtilities';
 
 export const getMovieProviders = async (movieId: string): Promise<ICountryProvider> => {
-  const apiResponse = await makeAPICall<ICountryProvider>(`/movieProviders/${movieId}`);
+  const apiResponse = await makeAPICall<ICountryProvider>(`/theMovieDb/movieProviders/${movieId}`);
   return apiResponse;
 };
 
 export const getPlayingNowMovies = async () => {
   const apiResponse = await makeAPICall<Array<IMoviePlayingNow>>(
-    `/movieProviders/teathers/playingNow`,
+    `/theMovieDb/teathers/playingNow`,
   );
   return apiResponse;
 };
