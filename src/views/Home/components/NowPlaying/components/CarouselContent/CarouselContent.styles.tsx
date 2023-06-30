@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: -80,
   },
-  metricsContainer: { flexDirection: 'row', justifyContent: 'space-evenly', marginVertical: 10 },
+  metricsContainer: { flexDirection: 'row', justifyContent: 'space-evenly', marginVertical: 20 },
   metricsInfo: { color: '#FFF', fontSize: 20 },
   title: {
     textAlign: 'center',
