@@ -8,6 +8,7 @@ const categories = require('../../../../../../constants/moviedbGenres.json');
 
 type CarouselContentProps = {
   movie: IMoviePlayingNow;
+  onMoreInfoPress: () => void;
 };
 
 const CarouselContent = (props: CarouselContentProps) => {
@@ -38,7 +39,7 @@ const CarouselContent = (props: CarouselContentProps) => {
         <Metrics name={`Average`} value={movie.vote_average} />
         <Metrics name={`Popularity`} value={movie.popularity} />
       </View>
-      <Pressable style={styles.moreInfoButton}>
+      <Pressable style={styles.moreInfoButton} onPress={props.onMoreInfoPress}>
         <Text style={styles.buttonText}> More Info</Text>
       </Pressable>
     </View>

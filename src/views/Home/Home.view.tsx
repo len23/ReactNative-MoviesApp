@@ -6,6 +6,7 @@ import NowPlaying from './components/NowPlaying/NowPlaying';
 import { MovieOptions } from '../../types/MovieOptions';
 import MainContainer from '../../containers/MainContainer/MainContainer';
 import useThemeStore from '../../store/themeStore';
+import { IMoviePlayingNow } from '../../types/IMoviePlayingNow';
 
 type HomeProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 
@@ -22,7 +23,13 @@ const Home = (props: HomeProps) => {
       />
     );
   } else if (theme === MovieOptions.NOW_PLAYING) {
-    children = <NowPlaying />;
+    children = (
+      <NowPlaying
+        onMoreInfoPress={(movie: IMoviePlayingNow) =>
+          props.navigation.navigate('NowPlayingDetails', { movieNowPlaying: movie })
+        }
+      />
+    );
   }
 
   return <MainContainer>{children}</MainContainer>;

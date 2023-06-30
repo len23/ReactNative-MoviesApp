@@ -4,8 +4,13 @@ import Carousel from 'react-native-reanimated-carousel';
 import useMoviesStore from '../../../../store/moviesStore';
 // import { styles } from './NowPlaying.styles';
 import CarouselContent from './components/CarouselContent/CarouselContent';
+import { IMoviePlayingNow } from '../../../../types/IMoviePlayingNow';
 
-function NowPlaying() {
+type NowPlayingProps = {
+  onMoreInfoPress: (movie: IMoviePlayingNow) => void;
+};
+
+function NowPlaying(props: NowPlayingProps) {
   const window = Dimensions.get('window');
   const PAGE_WIDTH = window.width;
   const HEIGHT_WIDTH = window.height;
@@ -22,7 +27,9 @@ function NowPlaying() {
       mode="parallax"
       data={moviesPlayingNow}
       scrollAnimationDuration={3000}
-      renderItem={({ item }) => <CarouselContent movie={item} />}
+      renderItem={({ item }) => (
+        <CarouselContent movie={item} onMoreInfoPress={() => props.onMoreInfoPress(item)} />
+      )}
     />
   );
 }
