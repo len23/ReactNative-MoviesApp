@@ -1,328 +1,47 @@
-import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import MapView, { MapMarker, MapStyleElement, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-
-const markers = [
-  {
-    latlng: {
-      latitude: -0.179703,
-      longitude: -78.478639,
-    },
-
-    title: 'Supercines',
-    id: 'supercines',
-    icon: require('../../../assets/logo-supercines-2.png'),
-  },
-  {
-    latlng: {
-      latitude: -0.17748,
-      longitude: -78.48539,
-    },
-
-    title: 'Multicines',
-    id: 'multicines',
-    icon: require('../../../assets/multicines_logo.png'),
-  },
-  {
-    latlng: {
-      latitude: -0.17488,
-      longitude: -78.49263,
-    },
-
-    title: 'Cinemark',
-    id: 'cinemark',
-    icon: require('../../../assets/cinemark-logo.png'),
-  },
-];
-
-const mapStyle: MapStyleElement[] = [
-  {
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#ebe3cd',
-      },
-    ],
-  },
-  {
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#523735',
-      },
-    ],
-  },
-  {
-    elementType: 'labels.text.stroke',
-    stylers: [
-      {
-        color: '#f5f1e6',
-      },
-    ],
-  },
-  {
-    featureType: 'administrative',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#c9b2a6',
-      },
-    ],
-  },
-  {
-    featureType: 'administrative.land_parcel',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#dcd2be',
-      },
-    ],
-  },
-  {
-    featureType: 'administrative.land_parcel',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#ae9e90',
-      },
-    ],
-  },
-  {
-    featureType: 'landscape.natural',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#dfd2ae',
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#dfd2ae',
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    elementType: 'labels.text',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#93817c',
-      },
-    ],
-  },
-  {
-    featureType: 'poi.business',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
-    featureType: 'poi.park',
-    elementType: 'geometry.fill',
-    stylers: [
-      {
-        color: '#8fa040',
-      },
-    ],
-  },
-  {
-    featureType: 'poi.park',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#447530',
-      },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#f5f1e6',
-      },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'labels.icon',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
-    featureType: 'road.arterial',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#fdfcf8',
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#f8c967',
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#e9bc62',
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway.controlled_access',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#e98d58',
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway.controlled_access',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#db8555',
-      },
-    ],
-  },
-  {
-    featureType: 'road.local',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#806b63',
-      },
-    ],
-  },
-  {
-    featureType: 'transit',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.line',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#dfd2ae',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.line',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#8f7d77',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.line',
-    elementType: 'labels.text.stroke',
-    stylers: [
-      {
-        color: '#ebe3cd',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.station',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#dfd2ae',
-      },
-    ],
-  },
-  {
-    featureType: 'water',
-    elementType: 'geometry.fill',
-    stylers: [
-      {
-        color: '#b9d3c2',
-      },
-    ],
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#92998d',
-      },
-    ],
-  },
-];
+import useAuthStore from '../../store/authStore';
+import { mapStyle, markers } from '../../constants/MapsConstants';
+import { styles } from './Maps.syles';
 
 const Maps = () => {
+  const [userLocation] = useAuthStore((state) => [state.userLocation]);
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        customMapStyle={mapStyle}
-        provider={PROVIDER_GOOGLE}
-        userInterfaceStyle="dark"
-        mapType="standard"
-        showsBuildings={true}
-        showsIndoors={true}
-        initialRegion={{
-          latitude: -0.179703,
-          longitude: -78.478639,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        {markers.map((marker, index) => (
-          <Marker
-            key={marker.id}
-            coordinate={marker.latlng}
-            title={marker.title}
-            image={marker.icon}
-          />
-        ))}
-      </MapView>
+      {!userLocation && (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>Retrieving your current location</Text>
+          <ActivityIndicator size="large" color="#00ff00" hidesWhenStopped={true} />
+        </View>
+      )}
+      {userLocation && (
+        <MapView
+          style={styles.map}
+          customMapStyle={mapStyle}
+          provider={PROVIDER_GOOGLE}
+          userInterfaceStyle="dark"
+          mapType="standard"
+          showsBuildings={true}
+          showsIndoors={true}
+          showsUserLocation={true}
+          initialRegion={{
+            ...userLocation,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          {markers.map((marker, index) => (
+            <Marker
+              key={marker.id}
+              coordinate={marker.latlng}
+              title={marker.title}
+              image={marker.icon}
+            />
+          ))}
+        </MapView>
+      )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-});
 
 export default Maps;

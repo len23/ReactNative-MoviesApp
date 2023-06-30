@@ -14,7 +14,11 @@ const Root = () => {
   const TabNavigator = createBottomTabNavigator();
   const [themeStyles] = useThemeStore((state) => [state.themeStyles]);
 
-  const [login, setLogin] = useAuthStore((state) => [state.login, state.setLogin]);
+  const [login, userLocation, setUserLocation] = useAuthStore((state) => [
+    state.login,
+    state.userLocation,
+    state.setUserLocation,
+  ]);
 
   if (!login) {
     return (
@@ -22,6 +26,10 @@ const Root = () => {
         <SignUpSatckScreen />
       </NavigationContainer>
     );
+  }
+
+  if (login && !userLocation) {
+    setUserLocation();
   }
 
   return (
