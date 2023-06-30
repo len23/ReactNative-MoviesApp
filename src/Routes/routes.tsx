@@ -15,6 +15,7 @@ import Login from '../views/Login/Login';
 import SignUp from '../views/SignUp/SignUp';
 import UserProfile from '../views/UserProfile/UserProfile';
 import Maps from '../views/Maps/Maps';
+import NowPlayingDetails from '../views/NowPlayingDetails/NowPlayingDetails';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const FavoritesStack = createNativeStackNavigator<FavoritesStackParamList>();
@@ -44,6 +45,7 @@ export const HomeStackScreen = () => {
           ),
         })}
       />
+      <HomeStack.Screen name="NowPlayingDetails" component={NowPlayingDetails} />
     </HomeStack.Navigator>
   );
 };

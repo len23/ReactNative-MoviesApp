@@ -1,4 +1,5 @@
 import { IMovie, IMovieByCategory } from './IMovie';
+import { IMoviePlayingNow } from './IMoviePlayingNow';
 
 export type HomeStackParamList = {
   Home: undefined;
@@ -10,6 +11,9 @@ export type HomeStackParamList = {
   };
   MovieProviders: {
     movie: IMovie;
+  };
+  NowPlayingDetails: {
+    movieNowPlaying: IMoviePlayingNow;
   };
 };
 
