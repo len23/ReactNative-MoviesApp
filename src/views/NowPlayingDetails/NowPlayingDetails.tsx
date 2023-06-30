@@ -7,7 +7,8 @@ import Trailer from './components/Trailer/Trailer';
 import Metrics from '../Home/components/NowPlaying/components/CarouselContent/components/Metrics/Metrics';
 import { styles } from './NowPlayingDetails.styles';
 import { getNameCategories } from '../../services/movieProviders';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Overview from './components/Overview/Overview';
+import Cinemas from './components/Cinemas/Cinemas';
 
 type NowPlayingDetailsProps = NativeStackScreenProps<HomeStackParamList, 'NowPlayingDetails'>;
 const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
@@ -44,22 +45,8 @@ const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
             <Metrics name={`Popularity`} value={movie.popularity} colorText={'#656262'} />
           </View>
           <Trailer idTrailer="" />
-
-          <View style={{ paddingHorizontal: 30, alignItems: 'center' }}>
-            <Text style={{ textAlign: 'center', color: '#c5c3c3' }} numberOfLines={3}>
-              {movie.overview}
-            </Text>
-            <Pressable
-              style={{
-                marginTop: 15,
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
-              <Text style={{ color: '#FFF' }}>Read More</Text>
-              <Ionicons name="chevron-down-outline" size={25} color={'#FFF'} />
-            </Pressable>
-          </View>
+          <Overview overview={movie.overview} />
+          <Cinemas />
         </SafeAreaView>
       </LinearGradient>
     </ImageBackground>
