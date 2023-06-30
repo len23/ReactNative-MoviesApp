@@ -12,7 +12,6 @@ type NowPlayingProps = {
 
 function NowPlaying(props: NowPlayingProps) {
   const window = Dimensions.get('window');
-  const PAGE_WIDTH = window.width;
   const HEIGHT_WIDTH = window.height;
   const [moviesPlayingNow] = useMoviesStore((state) => [state.moviesPlayingNow]);
 

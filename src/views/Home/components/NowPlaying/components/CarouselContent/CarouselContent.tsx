@@ -3,6 +3,7 @@ import { styles } from './CarouselContent.styles';
 import { IMoviePlayingNow } from '../../../../../../types/IMoviePlayingNow';
 import { useEffect, useState } from 'react';
 import Metrics from './components/Metrics/Metrics';
+import { getNameCategories } from '../../../../../../services/movieProviders';
 
 const categories = require('../../../../../../constants/moviedbGenres.json');
 
@@ -13,12 +14,7 @@ type CarouselContentProps = {
 
 const CarouselContent = (props: CarouselContentProps) => {
   const { movie } = props;
-  const [movieCategories, setMovieCategories] = useState([]);
-  useEffect(() => {
-    setMovieCategories(
-      categories.genres.filter((g: any) => movie.genre_ids.includes(g.id)).map((c: any) => c.name),
-    );
-  }, []);
+  const movieCategories = getNameCategories(movie.genre_ids);
 
   return (
     <View style={styles.contentContainer}>

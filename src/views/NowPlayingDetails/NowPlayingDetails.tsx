@@ -1,11 +1,18 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Image, ImageBackground, Text, View } from 'react-native';
+import { Alert, Button, Image, ImageBackground, Pressable, Text, View } from 'react-native';
 import { HomeStackParamList } from '../../types/Stacks';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Trailer from './components/Trailer/Trailer';
+import Metrics from '../Home/components/NowPlaying/components/CarouselContent/components/Metrics/Metrics';
+import { styles } from './NowPlayingDetails.styles';
+import { getNameCategories } from '../../services/movieProviders';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type NowPlayingDetailsProps = NativeStackScreenProps<HomeStackParamList, 'NowPlayingDetails'>;
 const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
   const movie = props.route.params.movieNowPlaying;
+
   return (
     <ImageBackground
       style={{ flex: 1 }}
@@ -22,7 +29,38 @@ const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
         ]}
         locations={[0.05, 0.4, 0.65, 1]}
       >
-        <Text>{movie.original_title}</Text>
+        <SafeAreaView style={{ alignItems: 'center', paddingTop: 40 }}>
+          <Text style={{ color: '#FFF', fontSize: 30, fontWeight: '600', textAlign: 'center' }}>
+            {movie.original_title}
+          </Text>
+          <View style={styles.categories}>
+            <Text style={styles.categoriesText} numberOfLines={2}>
+              {getNameCategories(movie.genre_ids).join(' \\ ')}
+            </Text>
+          </View>
+          <View style={styles.metricsContainer}>
+            <Metrics name={`Votes`} value={movie.vote_count} colorText={'#656262'} />
+            <Metrics name={`Average`} value={movie.vote_average} colorText={'#656262'} />
+            <Metrics name={`Popularity`} value={movie.popularity} colorText={'#656262'} />
+          </View>
+          <Trailer idTrailer="" />
+
+          <View style={{ paddingHorizontal: 30, alignItems: 'center' }}>
+            <Text style={{ textAlign: 'center', color: '#c5c3c3' }} numberOfLines={3}>
+              {movie.overview}
+            </Text>
+            <Pressable
+              style={{
+                marginTop: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <Text style={{ color: '#FFF' }}>Read More</Text>
+              <Ionicons name="chevron-down-outline" size={25} color={'#FFF'} />
+            </Pressable>
+          </View>
+        </SafeAreaView>
       </LinearGradient>
     </ImageBackground>
   );
