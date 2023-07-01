@@ -12,7 +12,6 @@ const Cinemas = (props: CinemasProps) => {
       {markers.map((m) => (
         <Pressable
           onPress={() => {
-            console.log('uuuuuuuuuuu');
             props.onCinemaPress(m);
           }}
           key={m.id}

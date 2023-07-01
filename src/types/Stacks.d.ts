@@ -18,7 +18,7 @@ export type HomeStackParamList = {
   };
 
   Maps: {
-    marker: Marker;
+    marker: Marker | undefined;
   };
 };
 
@@ -39,5 +39,7 @@ export type UserProfileParamList = {
 };
 
 export type MapsParamsList = {
-  Maps: undefined;
+  Maps: {
+    marker: undefined;
+  };
 };

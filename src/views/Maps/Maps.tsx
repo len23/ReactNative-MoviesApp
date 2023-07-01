@@ -1,22 +1,37 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import MapView, { MapMarker, MapStyleElement, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, {
+  LatLng,
+  MapMarker,
+  MapStyleElement,
+  Marker,
+  PROVIDER_GOOGLE,
+  Polyline,
+} from 'react-native-maps';
 import useAuthStore from '../../store/authStore';
 import { mapStyle, markers } from '../../constants/MapsConstants';
 import { styles } from './Maps.syles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../types/Stacks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCurrentPositionAsync } from 'expo-location';
+import { getDirections } from '../../services/GoogleApiService';
 
 type MapsProps = NativeStackScreenProps<HomeStackParamList, 'Maps'>;
 const Maps = (props: MapsProps) => {
-  const destination = props.route.params.marker;
+  const destination = props.route.params ? props.route.params.marker?.latlng : null;
   const [userLocation] = useAuthStore((state) => [state.userLocation]);
-  const [userLocation] = useAuthStore((state) => [state.userLocation]);
+  const [coordinates, setCoordinates] = useState<LatLng[]>();
 
   useEffect(() => {
-    getCurrentPositionAsync;
-  }, []);
+    const fetchCoords = async (destination: LatLng, userLocation: LatLng) => {
+      const end = { latitude: destination.latitude, longitude: destination.longitude };
+      const coords = await getDirections(userLocation, end);
+      setCoordinates(coords);
+    };
+    if (destination && userLocation) {
+      fetchCoords(destination, userLocation);
+    }
+  }, [userLocation]);
   return (
     <View style={styles.container}>
       {!userLocation && (
@@ -49,6 +64,7 @@ const Maps = (props: MapsProps) => {
               image={marker.icon}
             />
           ))}
+          {coordinates && <Polyline coordinates={coordinates} strokeWidth={5} strokeColor="red" />}
         </MapView>
       )}
     </View>

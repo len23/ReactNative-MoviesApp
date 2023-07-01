@@ -1,7 +1,6 @@
 import { Image, Pressable, Text, View } from 'react-native';
 import { styles } from './CarouselContent.styles';
 import { IMoviePlayingNow } from '../../../../../../types/IMoviePlayingNow';
-import { useEffect, useState } from 'react';
 import Metrics from './components/Metrics/Metrics';
 import { getNameCategories } from '../../../../../../services/movieProviders';
 

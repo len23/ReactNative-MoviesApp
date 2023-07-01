@@ -3,8 +3,8 @@ import { MapStyleElement } from 'react-native-maps';
 export const markers = [
   {
     latlng: {
-      latitude: -0.179703,
-      longitude: -78.478639,
+      latitude: -0.17951921947330596,
+      longitude: -78.4785787288469,
     },
 
     title: 'Supercines',
