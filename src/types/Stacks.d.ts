@@ -1,3 +1,4 @@
+import { Marker } from './IMarket';
 import { IMovie, IMovieByCategory } from './IMovie';
 import { IMoviePlayingNow } from './IMoviePlayingNow';
 
@@ -14,6 +15,10 @@ export type HomeStackParamList = {
   };
   NowPlayingDetails: {
     movieNowPlaying: IMoviePlayingNow;
+  };
+
+  Maps: {
+    marker: Marker;
   };
 };
 

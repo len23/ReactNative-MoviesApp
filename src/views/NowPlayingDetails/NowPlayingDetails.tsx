@@ -9,6 +9,7 @@ import { styles } from './NowPlayingDetails.styles';
 import { getNameCategories } from '../../services/movieProviders';
 import Overview from './components/Overview/Overview';
 import Cinemas from './components/Cinemas/Cinemas';
+import { Marker } from '../../types/IMarket';
 
 type NowPlayingDetailsProps = NativeStackScreenProps<HomeStackParamList, 'NowPlayingDetails'>;
 const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
@@ -46,7 +47,11 @@ const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
           </View>
           <Trailer idTrailer="" />
           <Overview overview={movie.overview} />
-          <Cinemas />
+          <Cinemas
+            onCinemaPress={(marker: Marker) => {
+              props.navigation.navigate('Maps', { marker: marker });
+            }}
+          />
         </SafeAreaView>
       </LinearGradient>
     </ImageBackground>
@@ -54,4 +59,3 @@ const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
 };
 
 export default NowPlayingDetails;
-// uri: `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`,

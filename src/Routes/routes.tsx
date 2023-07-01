@@ -46,6 +46,23 @@ export const HomeStackScreen = () => {
         })}
       />
       <HomeStack.Screen name="NowPlayingDetails" component={NowPlayingDetails} />
+      <HomeStack.Screen
+        name="Maps"
+        component={Maps}
+        options={({ navigation, route }) => ({
+          headerShown: true,
+          headerTransparent: true,
+          headerTitle: '',
+          headerLeft: () => (
+            <Ionicons
+              name="arrow-back-outline"
+              color="#000"
+              size={40}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
     </HomeStack.Navigator>
   );
 };
