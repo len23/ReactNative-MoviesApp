@@ -6,15 +6,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Trailer from './components/Trailer/Trailer';
 import Metrics from '../Home/components/NowPlaying/components/CarouselContent/components/Metrics/Metrics';
 import { styles } from './NowPlayingDetails.styles';
-import { getNameCategories } from '../../services/movieProviders';
+import { getMovieVideo, getNameCategories } from '../../services/movieProviders';
 import Overview from './components/Overview/Overview';
 import Cinemas from './components/Cinemas/Cinemas';
 import { Marker } from '../../types/IMarket';
+import { useEffect, useState } from 'react';
 
 type NowPlayingDetailsProps = NativeStackScreenProps<HomeStackParamList, 'NowPlayingDetails'>;
 const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
   const movie = props.route.params.movieNowPlaying;
+  const [idTrailer, setIdTrailer] = useState<string>('');
 
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getMovieVideo(String(movie.id));
+      setIdTrailer(result.key);
+    }
+    fetchData();
+  }, []);
   return (
     <ImageBackground
       style={{ flex: 1 }}
@@ -45,7 +54,7 @@ const NowPlayingDetails = (props: NowPlayingDetailsProps) => {
             <Metrics name={`Average`} value={movie.vote_average} colorText={'#656262'} />
             <Metrics name={`Popularity`} value={movie.popularity} colorText={'#656262'} />
           </View>
-          <Trailer idTrailer="" />
+          <Trailer idTrailer={idTrailer} />
           <Overview overview={movie.overview} />
           <Cinemas
             onCinemaPress={(marker: Marker) => {

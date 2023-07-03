@@ -17,6 +17,12 @@ export const getNameCategories = (genreIds: Array<number>) => {
   const nameCategories = categories.genres
     .filter((g: any) => genreIds.includes(g.id))
     .map((c: any) => c.name);
-
   return nameCategories;
+};
+
+export const getMovieVideo = async (movieId: string) => {
+  const apiResponse = await makeAPICall<{ key: string }>(
+    `/theMovieDb/movieProviders/movieVideo/${movieId}`,
+  );
+  return apiResponse;
 };

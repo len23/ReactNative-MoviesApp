@@ -22,7 +22,7 @@ const Trailer = (props: TrailerProps) => {
         width={PAGE_WIDTH * 0.85}
         height={PAGE_HEIGHT * 0.25}
         play={playing}
-        videoId={'iee2TATGMyI'}
+        videoId={idTrailer}
         onChangeState={onStateChange}
       />
     </View>
