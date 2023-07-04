@@ -12,7 +12,7 @@ import useAuthStore from '../../store/authStore';
 const styles = { ...stylesLogin };
 
 const Login = (props: LoginProps) => {
-  const [setLogin] = useAuthStore((state) => [state.setLogin]);
+  const [setLogin, setUserName] = useAuthStore((state) => [state.setLogin, state.setUserName]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [logInForm, setLogInForm] = useState<LoginForm>({
     userName: '',
@@ -27,6 +27,7 @@ const Login = (props: LoginProps) => {
     try {
       setIsLoading(true);
       const response = await logInUser(logInForm);
+      setUserName(response.userName);
       setLogin(true);
     } catch (err: any) {
       Alert.alert('Alert Title', err.message);

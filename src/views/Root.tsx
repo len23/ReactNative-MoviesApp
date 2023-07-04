@@ -5,6 +5,7 @@ import {
   HomeStackScreen,
   MapsStackScreen,
   SignUpSatckScreen,
+  UserProfileStackScreen,
 } from '../Routes/routes';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useAuthStore from '../store/authStore';
@@ -60,13 +61,13 @@ const Root = () => {
             tabBarIcon: ({ color }) => <Ionicons name="bookmark" color={color} size={30} />,
           }}
         />
-        {/* <TabNavigator.Screen
-      name="UserProfileTab"
-      component={UserProfileStackScreen}
-      options={{
-        tabBarIcon: ({ color }) => <Ionicons name="person-circle" color={color} size={30} />,
-      }}
-    /> */}
+        <TabNavigator.Screen
+          name="UserProfileTab"
+          component={UserProfileStackScreen}
+          options={{
+            tabBarIcon: ({ color }) => <Ionicons name="person-circle" color={color} size={30} />,
+          }}
+        />
         <TabNavigator.Screen
           name="MapsTab"
           component={MapsStackScreen}

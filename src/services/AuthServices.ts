@@ -17,3 +17,9 @@ export const logInUser = async (credentials: ILogin): Promise<IUser> => {
   const apiResponse = await makeAPICall<IUser>('/logInUser', options);
   return apiResponse;
 };
+
+export const getUserData = async (userName: string): Promise<IUser> => {
+  const options = getRequestOptions('POST', 'application/json', JSON.stringify(userName));
+  const apiResponse = await makeAPICall<IUser>(`/userInfo/${userName}`, options);
+  return apiResponse;
+};

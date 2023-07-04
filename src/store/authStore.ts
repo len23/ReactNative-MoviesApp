@@ -7,8 +7,10 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 type AuthStore = {
   token: string;
   login: boolean;
+  userName: string | undefined;
   userLocation: LatLng | undefined;
   setUserLocation: () => void;
+  setUserName: (userName: string) => void;
   getToken: () => void;
   setLogin: (islogin: boolean) => void;
 };
@@ -19,9 +21,13 @@ const useAuthStore = create<AuthStore>()(
       token: '',
       login: false,
       userLocation: undefined,
+      userName: '',
       getToken: () => {},
       setLogin: (islogin: boolean) => {
         set({ login: islogin });
+      },
+      setUserName: (userName: string) => {
+        set({ userName: userName });
       },
       setUserLocation: async () => {
         let { status } = await requestForegroundPermissionsAsync();
