@@ -84,9 +84,14 @@ const SignUp = (props: SignUpProps) => {
       } else {
         const { email, userName, password, profilePictureName } = signUpInputs;
         const user: IUser = { email, userName, password, profilePictureName };
+
         await signUpUser(user);
-        if (uriPicture) {
-          await uploadProfilepicture(uriPicture, FileSystemUploadType.BINARY_CONTENT);
+        if (uriPicture && profilePictureName) {
+          await uploadProfilepicture(
+            uriPicture,
+            FileSystemUploadType.BINARY_CONTENT,
+            profilePictureName,
+          );
         }
         msg = 'User Registered';
       }
@@ -109,6 +114,7 @@ const SignUp = (props: SignUpProps) => {
       Alert.alert('Alert Title', 'No spaces allowed for user name');
       return;
     }
+
     const newInput = { ...signUpInputs, [key]: text };
     setSignUpInputs(newInput);
   };
@@ -120,6 +126,8 @@ const SignUp = (props: SignUpProps) => {
           setShowCamera(!showCamera);
         }}
         onPressAccept={(uri: string | undefined) => {
+          console.log('uri ===> ', uri);
+
           setUriPicture(uri);
         }}
       />

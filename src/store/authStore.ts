@@ -26,8 +26,8 @@ const useAuthStore = create<AuthStore>()(
       setLogin: (islogin: boolean) => {
         set({ login: islogin });
       },
-      setUserName: (userName: string) => {
-        set({ userName: userName });
+      setUserName: (userNameResponse: string) => {
+        set({ userName: userNameResponse });
       },
       setUserLocation: async () => {
         let { status } = await requestForegroundPermissionsAsync();

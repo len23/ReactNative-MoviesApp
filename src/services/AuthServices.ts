@@ -12,14 +12,14 @@ export const signUpUser = async (user: IUser): Promise<IUser | undefined> => {
   return apiResponse;
 };
 
-export const logInUser = async (credentials: ILogin): Promise<IUser> => {
+export const logInUser = async (credentials: ILogin): Promise<IUser | undefined> => {
   const options = getRequestOptions('POST', 'application/json', JSON.stringify(credentials));
   const apiResponse = await makeAPICall<IUser>('/logInUser', options);
   return apiResponse;
 };
 
 export const getUserData = async (userName: string): Promise<IUser> => {
-  const options = getRequestOptions('POST', 'application/json', JSON.stringify(userName));
+  const options = getRequestOptions('GET', 'application/json');
   const apiResponse = await makeAPICall<IUser>(`/userInfo/${userName}`, options);
   return apiResponse;
 };

@@ -27,10 +27,13 @@ const Login = (props: LoginProps) => {
     try {
       setIsLoading(true);
       const response = await logInUser(logInForm);
-      setUserName(response.userName);
-      setLogin(true);
+      if (response) {
+        setUserName(response.userName);
+        setLogin(true);
+      }
     } catch (err: any) {
       Alert.alert('Alert Title', err.message);
+      setIsLoading(false);
     }
   };
 
