@@ -12,11 +12,12 @@ type TextIconInputProps = {
   ionIconName: string;
   placeholder: string;
   inputMode?: InputModeOptions | undefined;
-  onChangeInput: (text: string, key: string) => void;
+  onChangeInput?: (text: string, key: string) => void;
   value: string;
   name: string;
   secure?: boolean;
   onKeyPress?: (event: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
+  editable?: boolean;
 };
 
 const styles = { ...stylesTextIconInput };
@@ -29,11 +30,14 @@ const TextIconInput = (props: TextIconInputProps) => {
         placeholder={props.placeholder}
         placeholderTextColor={'#A8B6B8'}
         inputMode={props.inputMode ? props.inputMode : 'text'}
-        onChangeText={(text) => props.onChangeInput(text, props.name)}
+        onChangeText={(text) =>
+          props.onChangeInput ? props.onChangeInput(text, props.name) : () => {}
+        }
         value={props.value}
         secureTextEntry={props.secure}
         onKeyPress={props.onKeyPress}
         autoCorrect={false}
+        editable={props.editable}
       />
     </View>
   );

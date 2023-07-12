@@ -5,6 +5,7 @@ import useThemeStore from '../../store/themeStore';
 import { useEffect, useState } from 'react';
 import { MovieOptions } from '../../types/MovieOptions';
 import { LinearGradient } from 'expo-linear-gradient';
+import { PAGE_HEIGHT } from '../../constants/WindowConstants';
 
 type MainContainerProps = {
   children: React.ReactNode;

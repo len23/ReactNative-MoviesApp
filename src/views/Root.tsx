@@ -68,13 +68,6 @@ const Root = () => {
             tabBarIcon: ({ color }) => <Ionicons name="person-circle" color={color} size={30} />,
           }}
         />
-        {/* <TabNavigator.Screen
-          name="MapsTab"
-          component={MapsStackScreen}
-          options={{
-            tabBarIcon: ({ color }) => <Ionicons name="map" color={color} size={30} />,
-          }}
-        /> */}
       </TabNavigator.Navigator>
     </NavigationContainer>
   );
