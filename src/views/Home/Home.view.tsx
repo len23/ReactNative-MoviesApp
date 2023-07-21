@@ -17,9 +17,9 @@ const Home = (props: HomeProps) => {
   if (theme === 'IMDB') {
     children = (
       <IMDBListMovies
-        onMoviePress={(movie: IMovie) =>
-          props.navigation.navigate('MovieDetails', { movie: movie })
-        }
+        onMoviePress={(movie: IMovie) => {
+          props.navigation.navigate('MovieDetails', { movie: movie });
+        }}
       />
     );
   } else if (theme === MovieOptions.NOW_PLAYING) {

@@ -34,7 +34,7 @@ const UserProfile = () => {
         {userInfo && (
           <View style={{}}>
             <Image
-              source={{ uri: `http://192.168.100.48:5001/uploads/${userInfo.profilePictureName}` }}
+              source={{ uri: `http://192.168.100.51:5001/uploads/${userInfo.profilePictureName}` }}
               style={{
                 width: 150,
                 height: 150,

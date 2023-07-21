@@ -11,6 +11,8 @@ import TrailerModal from '../../components/TrailerModal/TrailerModal';
 const DetailScreen = (props: DetailScreenProps) => {
   const styles = { ...detailScreenStyles };
   const movie = props.route.params.movie;
+  console.log('movie -----> ', movie);
+
   const [favs, addToFav, removeFromFav] = useFavSavedMoviesStore((state) => [
     state.favs,
     state.addToFav,
